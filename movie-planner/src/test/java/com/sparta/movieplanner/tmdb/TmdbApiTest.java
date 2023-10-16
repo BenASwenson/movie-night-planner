@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.client.RestTemplate;
-// import com.sparta.movieplanner.tmdb.Genre;
 
 import com.sparta.movieplanner.tmdb.Genre;
 
