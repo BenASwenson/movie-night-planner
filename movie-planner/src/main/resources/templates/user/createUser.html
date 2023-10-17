@@ -3,8 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    <Style>
+        form label {
+            display: inline-block;
+            width: 80px;
+            align-text: right;
+        }
+
+        form label, form input {
+            margin-bottom: 10px;
+        }
+
+        form input {
+            width: 250px;
+        }
+    </Style>
 </head>
 <body>
+
+
+
+<h1>Register</h1>
+
+<form>
+    <section class="label-input-wrapper">
+        <label for="firstName">First Name:</label>
+        <input id="firstName" name="firstName" type="text" placeholder="John" required>
+        <br>
+        <label for="lastName">Last Name:</label>
+        <input id="lastName" name="lastName" type="text" placeholder="Smith" required>
+    </section>
+
+    <section class="label-input-wrapper">
+        <label for="email">Email:</label>
+        <input id="email" name="email" type="email" placeholder="name@mail.com" required>
+    </section>
+
+    <section class="label-input-wrapper">
+        <label for="password">Password:</label>
+        <input id="password" name="password" type="password" placeholder="Shhh...." required>
+    </section>
+
+    <br>
+    <button type="submit">Sign Up</button>
+</form>
 
 </body>
 </html>
