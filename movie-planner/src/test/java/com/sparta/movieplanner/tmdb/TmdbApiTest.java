@@ -32,4 +32,19 @@ public class TmdbApiTest {
         }
     }
 
+    @Test
+    void queryMoviesTest() {
+        WebClient client = WebClient.create("https://api.themoviedb.org");
+        String query = "Star Wars";
+        Mono<MovieResponse> result = client.get()
+                .uri("/3/search/movie?query={query}&include_adult=false&language=en-US&page=1&api_key={key}", query, key)
+                .retrieve()
+                .bodyToMono(MovieResponse.class);
+        MovieResponse response = result.block();
+        for (MovieShort s : response.results) {
+            System.out.println("movie: " + s.title + " id=" + s.id);
+        }
+    }
+
+
 }
