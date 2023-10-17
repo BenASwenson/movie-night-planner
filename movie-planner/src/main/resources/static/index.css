@@ -1,0 +1,52 @@
+body {
+    background-color: #F8F9FA
+}
+
+.navbar {
+    border-bottom: 1px solid black;
+}
+/*
+.image-container {
+    max-width: 100%;
+    text-align: center;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+    opacity: .09;
+    margin-top: 35px;
+    padding: 50px;
+}
+*/
+
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    opacity: .09;
+}
+
+
+.overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    padding: 20px;
+}
+
+.overlay h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.overlay input {
+    width: 200px;
+    padding: 10px;
+    font-size: 16px;
+}
