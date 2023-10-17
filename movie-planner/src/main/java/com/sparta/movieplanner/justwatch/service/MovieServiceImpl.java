@@ -104,8 +104,11 @@ public class MovieServiceImpl implements MovieService {
         // Map the endpoint response to the Movie entity (object)
         Movie movie = mapper.readValue(response.body(), new TypeReference<Movie>() {});
 
+        System.out.println(movie);
 
         List<Provider> providers = new ArrayList<>();
+        // e.g. movie with id 2995 gives null providers
+        if(movie.getOffers() == null || movie.getOffers().size() == 0) return providers;
 
         for(int i = 0; i < movie.getOffers().size(); i++){
             Offers offer = movie.getOffers().get(i);
@@ -116,7 +119,7 @@ public class MovieServiceImpl implements MovieService {
             provider.setCurrency(offer.getCurrency());
             provider.setProvider_url(offer.getUrls().getRaw_web());
 
-            providers.add(provider);
+            providers.add(new Provider(provider));
         }
         return providers;
     }

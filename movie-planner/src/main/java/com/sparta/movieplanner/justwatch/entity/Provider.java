@@ -36,6 +36,17 @@ public class Provider {
         this.provider_url = provider_url;
     }
 
+    public Provider(Provider provider){
+        this.id = provider.getId();
+        this.technical_name = provider.getTechnical_name();
+        this.icon_url = provider.getIcon_url();
+        this.monetization_type = provider.getMonetization_type();
+        this.presentation_type = provider.getPresentation_type();
+        this.retail_price = provider.retail_price;
+        this.currency = provider.getCurrency();
+        this.provider_url = provider.getProvider_url();
+    }
+
     public int getId() {
         return id;
     }
@@ -106,6 +117,11 @@ public class Provider {
                 "id=" + id +
                 ", technical_name='" + technical_name + '\'' +
                 ", icon_url='" + icon_url + '\'' +
+                ", monetization_type='" + monetization_type + '\'' +
+                ", presentation_type='" + presentation_type + '\'' +
+                ", retail_price=" + retail_price +
+                ", currency='" + currency + '\'' +
+                ", provider_url='" + provider_url + '\'' +
                 '}';
     }
 }
