@@ -7,6 +7,8 @@ public class Movie {
     private int original_release_year;
     private int runtime;
 
+
+
     private List<Offers> offers;
 
     public Movie(){}
