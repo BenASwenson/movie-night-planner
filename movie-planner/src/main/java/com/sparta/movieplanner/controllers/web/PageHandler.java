@@ -27,11 +27,4 @@ public class PageHandler {
         return homepage;
     }
 
-    @GetMapping("register")
-    public String signUp() {
-        String registerPage = "user/createUser";
-        log.info("loading register page: " + registerPage + ".html");
-
-        return registerPage;
-    }
 }

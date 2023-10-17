@@ -1,53 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
 
-    <Style>
-        form label {
-            display: inline-block;
-            width: 80px;
-            align-text: right;
-        }
+        <Style>
+            form label {
+                display: inline-block;
+                width: 80px;
+                align-text: right;
+            }
 
-        form label, form input {
-            margin-bottom: 10px;
-        }
+            form label, form input {
+                margin-bottom: 10px;
+            }
 
-        form input {
-            width: 250px;
-        }
-    </Style>
-</head>
-<body>
+            form input {
+                width: 250px;
+            }
+        </Style>
+    </head>
+    <body>
 
+        <h1>Register</h1>
 
+        <form th:action="@{/register/form}" th:object="${user}" method="POST">
+            <section class="label-input-wrapper">
+                <label for="firstName">First Name:</label>
+                <input id="firstName" name="firstName" type="text" th:field="*{firstName}" placeholder="John" required>
+                <br>
+                <label for="lastName">Last Name:</label>
+                <input id="lastName" name="lastName" type="text" th:field="*{lastName}" placeholder="Smith" required>
+            </section>
 
-<h1>Register</h1>
+            <section class="label-input-wrapper">
+                <label for="username">Email:</label>
+                <input id="username" name="username" type="email" th:field="*{username}" placeholder="name@mail.com" required>
+            </section>
 
-<form>
-    <section class="label-input-wrapper">
-        <label for="firstName">First Name:</label>
-        <input id="firstName" name="firstName" type="text" placeholder="John" required>
-        <br>
-        <label for="lastName">Last Name:</label>
-        <input id="lastName" name="lastName" type="text" placeholder="Smith" required>
-    </section>
+            <section class="label-input-wrapper">
+                <label for="password">Password:</label>
+                <input id="password" name="password" type="password" th:field="*{password}" placeholder="Shhh...." required>
+            </section>
 
-    <section class="label-input-wrapper">
-        <label for="email">Email:</label>
-        <input id="email" name="email" type="email" placeholder="name@mail.com" required>
-    </section>
+            <br>
+            <button type="submit">Sign Up</button>
+        </form>
 
-    <section class="label-input-wrapper">
-        <label for="password">Password:</label>
-        <input id="password" name="password" type="password" placeholder="Shhh...." required>
-    </section>
+        <div th:if="${doesUserAlreadyExist}">
+            <p><span th:text="${userAlreadyExistsMsg}"></span> </p>
+        </div>
 
-    <br>
-    <button type="submit">Sign Up</button>
-</form>
+        <div th:if="${registerSuccessful}">
+            <p>You are now registered!</p>
+        </div>
 
-</body>
+    </body>
 </html>
