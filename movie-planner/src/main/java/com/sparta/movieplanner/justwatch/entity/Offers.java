@@ -6,15 +6,23 @@ public class Offers {
     private double retail_price;
     private String currency;
 
+    private String presentation_type;
+    private String raw_web;
+
+    private Urls urls;
+
 
     public Offers(){}
 
 
-    public Offers(int provider_id, String monetization_type, double retail_price, String currency) {
+    public Offers(int provider_id, String monetization_type, double retail_price, String currency, String presentation_type, String raw_web, Urls urls) {
         this.provider_id = provider_id;
         this.monetization_type = monetization_type;
         this.retail_price = retail_price;
         this.currency = currency;
+        this.presentation_type = presentation_type;
+        this.raw_web = raw_web;
+        this.urls = urls;
     }
 
     public String getMonetization_type() {
@@ -49,6 +57,29 @@ public class Offers {
         this.currency = currency;
     }
 
+    public String getPresentation_type() {
+        return presentation_type;
+    }
+
+    public void setPresentation_type(String presentation_type) {
+        this.presentation_type = presentation_type;
+    }
+
+    public String getRaw_web() {
+        return raw_web;
+    }
+
+    public void setRaw_web(String raw_web) {
+        this.raw_web = raw_web;
+    }
+
+    public Urls getUrls() {
+        return urls;
+    }
+
+    public void setUrls(Urls urls) {
+        this.urls = urls;
+    }
 
     @Override
     public String toString() {
