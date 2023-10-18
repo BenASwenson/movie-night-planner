@@ -31,24 +31,24 @@
                     <a class="nav-link" href="#">Genres</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Watch List</a>
+                    <a th:if="${authenticated}" class="nav-link" href="#">Watch List</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Calendar</a>
+                    <a th:if="${authenticated}" class="nav-link" href="#">Calendar</a>
                 </li>
                 <li class="nav-item">
                     <button type="button" class="btn btn-outline-secondary btn-sm"><a class="nav-link" href="#">Login / Register</a></button>
                 </li>
+                <form th:action="@{/perform_logout}" method="POST">
+                    <button id="logoutButton" class="btn btn-outline-secondary btn-sm">Logout</button>
+                </form>
             </ul>
         </div>
     </div>
 </nav>
 
 
-<form th:action="@{/perform_logout}" method="POST">
-    <button id="logoutButton" class="btn btn-outline-secondary btn-sm">Logout</button>
 
-</form>
 
 <section th:if="${logoutSuccess}" class="logoutSuccess">
     <p>You have been logged out successfully!</p>
