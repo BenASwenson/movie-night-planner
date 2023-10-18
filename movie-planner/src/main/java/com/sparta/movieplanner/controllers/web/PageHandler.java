@@ -13,18 +13,18 @@ public class PageHandler {
 
     @GetMapping("login")
     public String loginPage() {
-        String loginPage = "login/login";
-        log.info("loading login page: " + loginPage + ".html");
+        String login = "login/login";
+        log.info("loading login page: " + login + ".html");
 
-        return loginPage;
+        return login;
     }
 
-    @GetMapping("homepage")
+    @GetMapping("movies")
     public String homepage() {
-        String homepage = "movie/searchMovie";
-        log.info("loading homepage: " + homepage + ".html");
+        String movies = "movie/searchMovie";
+        log.info("loading homepage: " + movies + ".html");
 
-        return homepage;
+        return movies;
     }
 
     @GetMapping("register")
@@ -34,4 +34,35 @@ public class PageHandler {
 
         return registerPage;
     }
+
+    @GetMapping("television")
+    public String searchTelevision() {
+        String television = "television/searchTelevision";
+        log.info("loading television search page: " + television + ".html");
+        return television;
+    }
+
+    @GetMapping("genres")
+    public String searchGenres() {
+        String genres = "genres/searchGenres";
+        log.info("loading television search page: " + genres + ".html");
+        return genres;
+    }
+
+    @GetMapping("watchList")
+    public String watchList() {
+        String watchList = "watchList/watchList";
+        log.info("loading watch list page: " + watchList + ".html");
+        return watchList;
+    }
+
+    @GetMapping("calendar")
+    public String calendar() {
+        String calendar = "calendar/calendar";
+        log.info("loading calendar page: " + calendar + ".html");
+        return calendar;
+    }
+
+
+
 }
