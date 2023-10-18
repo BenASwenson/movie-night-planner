@@ -7,18 +7,42 @@ import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 @Configuration
+@EnableWebSecurity
 public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.formLogin(Customizer.withDefaults())
-                .logout(Customizer.withDefaults());
+
+        http.authorizeHttpRequests(auth -> {
+            auth.requestMatchers("/perform_logout").authenticated();
+            auth.requestMatchers("/watchlist").authenticated();
+            auth.anyRequest().permitAll();
+        });
+
+        http.formLogin(formLogin ->
+                formLogin
+                        .loginPage("/login")
+                        .loginProcessingUrl("/perform_login")
+                        .defaultSuccessUrl("/homepage", true)
+                        .failureUrl("/login?error=true")
+                );
+
+        http.logout(logout ->
+                logout
+                        .logoutUrl("/perform_logout")
+                        .deleteCookies("JSESSIONID","XSRF-TOKEN")
+                        .logoutSuccessUrl("/homepage?logout=true")
+        );
+
 
         return http.build();
     }
