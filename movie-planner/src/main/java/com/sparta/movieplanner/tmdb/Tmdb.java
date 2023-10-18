@@ -39,6 +39,17 @@ public class Tmdb {
         return response.results;
     }
 
+    public MovieCreditResponse findCreditsByMovieId(int id) {
+
+        Mono<MovieCreditResponse> result = client.get()
+                .uri("https://api.themoviedb.org/3/movie/{id}/credits?api_key={key}",
+                        id, key)
+                .retrieve()
+                .bodyToMono(MovieCreditResponse.class);
+        return result.block();
+
+    }
+
     /**
      * Retrieve all genres available in TMDB.
      * @return list of Genres
