@@ -1,6 +1,5 @@
 package com.sparta.movieplanner.tmdb;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -42,7 +41,7 @@ public class Tmdb {
     public MovieCreditResponse findCreditsByMovieId(int id) {
 
         Mono<MovieCreditResponse> result = client.get()
-                .uri("https://api.themoviedb.org/3/movie/{id}/credits?api_key={key}",
+                .uri("/3/movie/{id}/credits?api_key={key}",
                         id, key)
                 .retrieve()
                 .bodyToMono(MovieCreditResponse.class);
@@ -65,5 +64,16 @@ public class Tmdb {
             return null;
         }
         return result.genres;
+    }
+
+    public Person getPersonById(int id) {
+
+        Mono<Person> result = client.get()
+                .uri("/3/person/{person_id}?api_key={key}",
+                        id, key)
+                .retrieve()
+                .bodyToMono(Person.class);
+        return result.block();
+
     }
 }

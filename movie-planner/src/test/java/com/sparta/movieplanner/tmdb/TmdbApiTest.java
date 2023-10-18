@@ -26,12 +26,18 @@ public class TmdbApiTest {
 
     }
     @Test
-    void movieCreditResponse() {
+    void movieCreditResponseTest() {
         Tmdb tmdb = new Tmdb();
         MovieCreditResponse credits = tmdb.findCreditsByMovieId(11);
         System.out.println(credits);
 
 
+    }
+    @Test
+    void getPersonByIdTest() {
+        Tmdb tmdb = new Tmdb();
+        Person person = tmdb.getPersonById(8);
+        System.out.println(person);
     }
 }
 
