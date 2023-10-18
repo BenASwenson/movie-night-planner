@@ -5,20 +5,6 @@ body {
 .navbar {
     border-bottom: 1px solid black;
 }
-/*
-.image-container {
-    max-width: 100%;
-    text-align: center;
-}
-
-.image-container img {
-    width: 100%;
-    height: auto;
-    opacity: .09;
-    margin-top: 35px;
-    padding: 50px;
-}
-*/
 
 .image-container {
     position: relative;
@@ -32,7 +18,7 @@ body {
 
 .overlay {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -49,4 +35,16 @@ body {
     width: 200px;
     padding: 10px;
     font-size: 16px;
+}
+
+.sectionHeader {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.calendar {
+
 }
