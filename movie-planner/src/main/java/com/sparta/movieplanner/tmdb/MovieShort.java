@@ -20,6 +20,9 @@ public class MovieShort {
     private double vote_average;
     private int vote_count;
 
+    public MovieShort(int id, String title, String overview, String posterPath) {
+    }
+
     public int getId() {
         return id;
     }

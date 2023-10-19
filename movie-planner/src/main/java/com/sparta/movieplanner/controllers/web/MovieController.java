@@ -10,6 +10,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 
@@ -18,19 +23,21 @@ import java.util.List;
 public class MovieController {
     Logger log = LoggerFactory.getLogger(MovieController.class);
     private final String movieHtmlPagePath = "movie/searchMovie";
+    private final MovieService movieService;
     @Autowired
-    MovieService movieService;
-
-    @GetMapping("movies")
-    public String movies(Model model) {
-        log.info("loading movies page: " + movieHtmlPagePath + ".html");
-
-
-
-        return movieHtmlPagePath;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
     }
 
-    // TODO: add or change the above to receive the request for a movie given a query
+    @GetMapping("movies")
+    public String movieSearch(@RequestParam(name = "query", required = false)String query, Model model) {
+            log.info("loading movies page: " + movieHtmlPagePath + ".html");
+            if (query != null) {
+                List<MovieDTO> movieDTOS = movieService.findMoviesByQuery(query);
+                model.addAttribute("movies", movieDTOS);
+            }
+            return "movie/searchMovie";
+    }
 
     @PostMapping("movies/search")
     public String searchMovies(@ModelAttribute("movieTitle") String title, Model model) {
@@ -51,6 +58,5 @@ public class MovieController {
 
         return movieHtmlPagePath;
     }
-
 
 }

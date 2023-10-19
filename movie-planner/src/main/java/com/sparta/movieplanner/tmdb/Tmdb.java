@@ -1,10 +1,11 @@
 package com.sparta.movieplanner.tmdb;
 
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-
+@Component
 public class Tmdb {
 
     private final String urlBase = "https://api.themoviedb.org";
