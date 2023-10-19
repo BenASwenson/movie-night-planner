@@ -84,42 +84,21 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Provider> findAllProvidersForAMovieByTMDBId(int id) throws IOException, InterruptedException {
 
-        String url = "https://apis.justwatch.com/contentpartner/v2/content/offers/object_type/movie/id_type/tmdb/locale/en_GB?id=" + id + "&token=" + token;
-
-        HttpClient client = HttpClient.newHttpClient();
-        // Make the http request
-        HttpRequest request = HttpRequest.newBuilder()
-                .GET()
-                .header("accept", "application/json")
-                .uri(URI.create(url))
-                .build();
-        // Store the endpoint response
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-        ObjectMapper mapper = new ObjectMapper();
-        // To bypass the exception ===> com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
-        mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-        mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-        // Map the endpoint response to the Movie entity (object)
-        Movie movie = mapper.readValue(response.body(), new TypeReference<Movie>() {});
-
-        System.out.println(movie);
+        Movie movie = findMovieByTMDBId(id);
 
         List<Provider> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
         if(movie.getOffers() == null || movie.getOffers().size() == 0) return providers;
-
         for(int i = 0; i < movie.getOffers().size(); i++){
             Offers offer = movie.getOffers().get(i);
-            Provider provider = providerRepository.findById(movie.getOffers().get(i).getProvider_id()).get();
-            provider.setMonetization_type(offer.getMonetization_type());
-            provider.setPresentation_type(offer.getPresentation_type());
-            provider.setRetail_price(offer.getRetail_price());
-            provider.setCurrency(offer.getCurrency());
-            provider.setProvider_url(offer.getUrls().getRaw_web());
 
-            providers.add(new Provider(provider));
+            Provider provider = providerRepository.findById(movie.getOffers().get(i).getProvider_id()).get();
+            provider.setProvider_url(offer.getUrls().getRaw_web());
+            if(i > 0 && providers.get(providers.size()-1).getId() ==  provider.getId()){
+                providers.set(providers.size()-1, provider);
+            }else{
+                providers.add(new Provider(provider));
+            }
         }
         return providers;
     }

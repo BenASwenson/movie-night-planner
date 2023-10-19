@@ -55,18 +55,17 @@ public class ShowServiceImpl implements ShowService{
 
         List<Provider> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
-        if(show.getOffers() == null || show.getOffers().size() == 0) return providers;
-
+        if(show.getOffers() == null || show == null || show.getOffers().size() == 0) return providers;
         for(int i = 0; i < show.getOffers().size(); i++){
             Offers offer = new Offers();
             offer = show.getOffers().get(i);
             Provider provider = providerRepository.findById(show.getOffers().get(i).getProvider_id()).get();
-            provider.setMonetization_type(offer.getMonetization_type());
-            provider.setPresentation_type(offer.getPresentation_type());
-            provider.setRetail_price(offer.getRetail_price());
-            provider.setCurrency(offer.getCurrency());
             provider.setProvider_url(offer.getUrls().getRaw_web());
-            providers.add(new Provider(provider));
+            if(i > 0 && providers.get(providers.size()-1).getId() ==  provider.getId()){
+                providers.set(providers.size()-1, provider);
+            }else{
+                providers.add(new Provider(provider));
+            }
         }
         return providers;
     }
