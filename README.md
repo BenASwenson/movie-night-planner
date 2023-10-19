@@ -1,1 +1,1 @@
-# movie-night-planner
+# Movie Night Planner
