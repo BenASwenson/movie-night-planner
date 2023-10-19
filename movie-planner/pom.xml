@@ -47,6 +47,12 @@
 			<version>2.15.2</version>
 		</dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
 		<dependency>
         <!-- For requesting REST resources -->
         <groupId>org.springframework.boot</groupId>
@@ -54,6 +60,7 @@
         </dependency>
 
 	</dependencies>
+
 
 	<build>
 		<plugins>
