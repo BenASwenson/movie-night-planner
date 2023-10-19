@@ -1,28 +1,38 @@
 package com.sparta.movieplanner.controllers.web;
 
+import com.sparta.movieplanner.dto.MovieDTO;
 import com.sparta.movieplanner.services.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/")
 public class MovieController {
 
     Logger log = LoggerFactory.getLogger(MovieController.class);
-
+    private final MovieService movieService;
     @Autowired
-    MovieService movieService;
+    public MovieController(MovieService movieService) {
+        this.movieService = movieService;
+    }
 
-    // TODO: add or change the above to receive the request for a movie given a query
     @GetMapping("movies")
-    public String homepage() {
-        String movies = "movie/searchMovie";
-        log.info("loading homepage: " + movies + ".html");
-
-        return movies;
+    public String movieSearch(@RequestParam(name = "query", required = false)String query, Model model) {
+        String movieSearch = "movie/searchMovie.html";
+        if (query != null) {
+            List<MovieDTO> movieDTOS = movieService.findMoviesByQuery(query);
+            model.addAttribute("movies", movieDTOS);
+        }
+        log.info("loading homepage: " + movieSearch);
+        return movieSearch;
     }
 }
