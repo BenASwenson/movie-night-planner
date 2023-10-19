@@ -12,7 +12,7 @@ public class TmdbApiTest {
         Tmdb tmdb = new Tmdb();
         List<Genre> genres = tmdb.getGenres();
         for(Genre g: genres) {
-            System.out.println("Id = " + g.id + " name = " + g.name);
+            System.out.println("Id = " + g.getId() + " name = " + g.getName());
         }
     }
 
@@ -21,8 +21,23 @@ public class TmdbApiTest {
         Tmdb tmdb = new Tmdb();
         List<MovieShort> results = tmdb.findMovies("Star Wars");
         for (MovieShort s : results) {
-            System.out.println("movie: " + s.title + " id=" + s.id);
+            System.out.println("movie: " + s.getTitle()+ " id=" + s.getId());
         }
-    }
 
+    }
+    @Test
+    void movieCreditResponseTest() {
+        Tmdb tmdb = new Tmdb();
+        MovieCreditResponse credits = tmdb.findCreditsByMovieId(11);
+        System.out.println(credits);
+
+
+    }
+    @Test
+    void getPersonByIdTest() {
+        Tmdb tmdb = new Tmdb();
+        Person person = tmdb.getPersonById(8);
+        System.out.println(person);
+    }
 }
+

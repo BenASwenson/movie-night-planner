@@ -1,59 +1,67 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta charset="UTF-8">
-        <title>Title</title>
 
-        <Style>
-            form label {
-                display: inline-block;
-                width: 80px;
-                align-text: right;
-            }
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-            form label, form input {
-                margin-bottom: 10px;
-            }
+    <!-- Bootstrap JS and dependencies (optional, for some features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-            form input {
-                width: 250px;
-            }
-        </Style>
-    </head>
-    <body>
+</head>
+<body>
+<!-- Top Bar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{homepage}">
+            <img src="/static/movieScreen.png" alt="screen logo" width="30" class="d-inline-block align-text-top">
+            Movie Night
+        </a>
 
-        <h1>Register</h1>
+    </div>
+</nav>
+<!-- Registration Form -->
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Register</div>
+                <div class="card-body">
+                    <form th:action="@{/register/form}" th:object="${user}" method="POST">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First name</label>
+                            <input  class="form-control" type="text" id="firstName"  name="firstName" th:field="*{firstName}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last name</label>
+                            <input class="form-control" type="text" id="lastName"  name="lastName" th:field="*{lastName}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="username" name="username" th:field="*{username}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" th:field="*{password}" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+            </div>
 
-        <form th:action="@{/register/form}" th:object="${user}" method="POST">
-            <section class="label-input-wrapper">
-                <label for="firstName">First Name:</label>
-                <input id="firstName" name="firstName" type="text" th:field="*{firstName}" placeholder="John" required>
-                <br>
-                <label for="lastName">Last Name:</label>
-                <input id="lastName" name="lastName" type="text" th:field="*{lastName}" placeholder="Smith" required>
-            </section>
+            <div th:if="${doesUserAlreadyExist}">
+                <p><span th:text="${userAlreadyExistsMsg}"></span> </p>
+            </div>
 
-            <section class="label-input-wrapper">
-                <label for="username">Email:</label>
-                <input id="username" name="username" type="email" th:field="*{username}" placeholder="name@mail.com" required>
-            </section>
+            <div th:if="${registerSuccessful}">
+                <p>You are now registered!</p>
+            </div>
 
-            <section class="label-input-wrapper">
-                <label for="password">Password:</label>
-                <input id="password" name="password" type="password" th:field="*{password}" placeholder="Shhh...." required>
-            </section>
-
-            <br>
-            <button type="submit">Sign Up</button>
-        </form>
-
-        <div th:if="${doesUserAlreadyExist}">
-            <p><span th:text="${userAlreadyExistsMsg}"></span> </p>
         </div>
+    </div>
+</div>
 
-        <div th:if="${registerSuccessful}">
-            <p>You are now registered!</p>
-        </div>
-
-    </body>
+</body>
 </html>
