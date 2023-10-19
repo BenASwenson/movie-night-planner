@@ -1,4 +1,4 @@
-package com.sparta.movieplanner.service;
+package com.sparta.movieplanner.services;
 
 import com.sparta.movieplanner.dto.MovieDTO;
 import org.springframework.stereotype.Service;
