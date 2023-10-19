@@ -39,7 +39,7 @@ public class WebSecurityConfig {
         http.logout(logout ->
                 logout
                         .logoutUrl("/perform_logout")
-                        .deleteCookies("JSESSIONID","XSRF-TOKEN")
+                        .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/homepage?logout=true")
         );
 

@@ -68,116 +68,79 @@
                     <img src="/static/movienightclapper.png" class="centered-image img-fluid" alt="movie clapperboard background">
                     <div class="overlay">
                         <h1>Search for movie by title:</h1>
-                        <input type="text" placeholder="Enter a title to search">
+                        <form th:action="@{/movies/search}" method="POST">
+                            <input type="text" name="movieTitle" placeholder="Enter a title to search">
+                            <input type="submit" value="Search">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Search result below -->
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-4 mb-4">
-                <h3>Goodfellas</h3>
-                <p>The true story of Henry Hill, a half-Irish, half-Sicilian Brooklyn
-                    kid who is adopted by neighbourhood gangsters at an early age and
-                    climbs the ranks of a mafia family under the guidance of Jimmy
-                    Conway.</p>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Rating</h5>
+
+        <!-- This content will be displayed if the search results are populated -->
+        <section th:if="${results_populated}">
+            <h2>Search Results:</h2>
+            <section th:each="movie : ${moviesList}" class="row">
+                <div class="col-md-8 offset-md-2 mt-4 mb-4">
+                    <h3 th:text="${movie.title}"></h3>
+                    <p th:text="${movie.overview}"></p>
+
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <h5>Rating</h5>
+                        </div>
+
+                        <div class="col-4">
+                            <h5 th:text="${movie.popularity}"></h5>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <h5>8.7</h5>
+
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <h5>Age Rating</h5>
+                        </div>
+
+                        <div class="col-4">
+                            <h5>Unknown</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Age Rating</h5>
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <h5>Director</h5>
+                        </div>
+                        <div class="col-4">
+                            <h5>Unknown</h5>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <h5>18</h5>
+
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <h5>Genres</h5>
+                        </div>
+
+                        <div class="col-4">
+                            <h5>Drama, Crime</h5>
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Director</h5>
+
+                    <div class="row justify-content-between">
+                        <div class="col-4">
+                            <h5>Watch</h5>
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <h5>Martin Scorsese</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Genres</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Drama, Crime</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Watch</h5>
-                    </div>
-                    <div class="col-4">
-                        <img src="" alt="image goes here">
+                    <div class="movie-image">
+                        <img th:src="'https://image.tmdb.org/t/p/original' + ${movie.poster_path}" alt="image goes here">
                     </div>
                 </div>
 
-            </div>
+            </section>
+        </section>
 
-        </div>
-        <!-- Search result below -->
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-4 mb-4">
-                <h3>Goodfellas</h3>
-                <p>The true story of Henry Hill, a half-Irish, half-Sicilian Brooklyn
-                    kid who is adopted by neighbourhood gangsters at an early age and
-                    climbs the ranks of a mafia family under the guidance of Jimmy
-                    Conway.</p>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Rating</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>8.7</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Age Rating</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>18</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Director</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Martin Scorsese</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Genres</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Drama, Crime</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Watch</h5>
-                    </div>
-                    <div class="col-4">
-                        <img src="" alt="image goes here">
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
+        <!-- This content will not be displayed if the search results are not populated -->
+        <section th:if="${results_not_found}">
+            <h2>No results found</h2>
+            <p th:text="'Sorry, we could not find any movies containing the title: ' + ${movieTitle}"></p>
+        </section>
 
 
     </div>

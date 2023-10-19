@@ -56,8 +56,6 @@
                 <div class="card-body">
 
                     <form th:action="@{/perform_login}" method="POST">
-                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" id="csrfToken" />
-
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" class="form-control" id="username" name="username" required>
