@@ -25,7 +25,7 @@ public class HomepageHandler {
             log.info("Logout was successful");
             model.addAttribute("logoutSuccess", true);
         }
-        
+
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);
