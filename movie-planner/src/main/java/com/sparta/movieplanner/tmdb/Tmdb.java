@@ -81,6 +81,7 @@ public class Tmdb {
     }
 
 
+    //  https://developer.themoviedb.org/reference/search-tv
     public List<TvShort> findTV(String query) {
 
         Mono<TvResponse> result = client.get()
@@ -96,16 +97,21 @@ public class Tmdb {
     }
 
 
-    // ToDo:
-    //  https://developer.themoviedb.org/reference/search-tv
-
-    // ToDo:
     //  https://developer.themoviedb.org/reference/tv-series-details
 
-    // ToDo:
-    //  https://developer.themoviedb.org/reference/tv-season-details
 
-    // ToDo:
+    public TvSeries getTvSeries(int id) {
+        Mono<TvSeries> result = client.get()
+                .uri("/3/tv/{series_id}?api_key={key}",
+                        id, key)
+                .retrieve()
+                .bodyToMono(TvSeries.class);
+        return result.block();
+    }
+
+
+    // ToDo on Friday Morning:
+    //  https://developer.themoviedb.org/reference/tv-season-details
     //  https://developer.themoviedb.org/reference/tv-episode-details
 
 

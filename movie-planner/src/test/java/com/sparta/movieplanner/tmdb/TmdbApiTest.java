@@ -41,10 +41,18 @@ public class TmdbApiTest {
     }
 
     @Test
-    void getListOfTV(){
+    void getListOfTV() {
         Tmdb tmdb = new Tmdb();
         List<TvShort> results = tmdb.findTV("Friends");
         System.out.println(results);
+    }
+
+    @Test
+    void getTvSeries() {
+        Tmdb tmdb = new Tmdb();
+        TvSeries results = tmdb.getTvSeries(2);
+        System.out.println(results);
+
 
     }
 }
