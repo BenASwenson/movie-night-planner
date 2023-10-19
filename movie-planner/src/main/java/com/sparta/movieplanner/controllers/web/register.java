@@ -1,6 +1,6 @@
 package com.sparta.movieplanner.controllers.web;
 
-import com.sparta.movieplanner.DTOs.UserDTO;
+import com.sparta.movieplanner.dto.UserDTO;
 import com.sparta.movieplanner.entities.User;
 import com.sparta.movieplanner.repositories.UserRepository;
 import com.sparta.movieplanner.services.RegisterService;

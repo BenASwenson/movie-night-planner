@@ -1,6 +1,6 @@
 package com.sparta.movieplanner.services;
 
-import com.sparta.movieplanner.DTOs.UserDTO;
+import com.sparta.movieplanner.dto.UserDTO;
 import com.sparta.movieplanner.entities.Role;
 import com.sparta.movieplanner.entities.User;
 import org.slf4j.Logger;

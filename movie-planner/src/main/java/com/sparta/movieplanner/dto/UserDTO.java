@@ -1,4 +1,4 @@
-package com.sparta.movieplanner.DTOs;
+package com.sparta.movieplanner.dto;
 
 public class UserDTO {
     private String firstName;
