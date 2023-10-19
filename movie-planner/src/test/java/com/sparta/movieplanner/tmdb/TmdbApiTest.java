@@ -39,5 +39,13 @@ public class TmdbApiTest {
         Person person = tmdb.getPersonById(8);
         System.out.println(person);
     }
+
+    @Test
+    void getListOfTV(){
+        Tmdb tmdb = new Tmdb();
+        List<TvShort> results = tmdb.findTV("Friends");
+        System.out.println(results);
+
+    }
 }
 

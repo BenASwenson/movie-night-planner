@@ -21,6 +21,7 @@ public class Tmdb {
 
     /**
      * Find all movies that have the 'query' in their title.
+     *
      * @param query
      * @return list of movies
      */
@@ -38,6 +39,7 @@ public class Tmdb {
         return response.results;
     }
 
+
     public MovieCreditResponse findCreditsByMovieId(int id) {
 
         Mono<MovieCreditResponse> result = client.get()
@@ -51,6 +53,7 @@ public class Tmdb {
 
     /**
      * Retrieve all genres available in TMDB.
+     *
      * @return list of Genres
      */
     public List<Genre> getGenres() {
@@ -76,4 +79,34 @@ public class Tmdb {
         return result.block();
 
     }
+
+
+    public List<TvShort> findTV(String query) {
+
+        Mono<TvResponse> result = client.get()
+                .uri("/3/search/tv?query={query}&include_adult=false&language=en-US&page=1&api_key={key}",
+                        query, key)
+                .retrieve()
+                .bodyToMono(TvResponse.class);
+        TvResponse response = result.block();
+        if (response == null) {
+            return null;
+        }
+        return response.getResults();
+    }
+
+
+    // ToDo:
+    //  https://developer.themoviedb.org/reference/search-tv
+
+    // ToDo:
+    //  https://developer.themoviedb.org/reference/tv-series-details
+
+    // ToDo:
+    //  https://developer.themoviedb.org/reference/tv-season-details
+
+    // ToDo:
+    //  https://developer.themoviedb.org/reference/tv-episode-details
+
+
 }
