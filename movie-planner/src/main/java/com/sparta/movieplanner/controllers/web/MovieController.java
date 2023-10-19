@@ -41,9 +41,12 @@ public class MovieController {
 
         if (!moviesList.isEmpty()) {
             model.addAttribute("results_populated", true);
+            model.addAttribute("results_not_found", false);
+
             model.addAttribute("moviesList", moviesList);
         } else {
             model.addAttribute("results_populated", false);
+            model.addAttribute("results_not_found", true);
         }
 
         return movieHtmlPagePath;
