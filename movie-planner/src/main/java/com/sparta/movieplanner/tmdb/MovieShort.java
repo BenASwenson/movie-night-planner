@@ -23,6 +23,8 @@ public class MovieShort {
     public MovieShort(int id, String title, String overview, String posterPath) {
     }
 
+    public MovieShort(){}
+
     public int getId() {
         return id;
     }

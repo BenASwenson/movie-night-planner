@@ -20,13 +20,15 @@ public class MovieService {
         this.tmdb = tmdb;
     }
     public List<MovieDTO> findMoviesByQuery(String query) {
+        log.info("findMoviesByQuery method is active");
         List<MovieShort> movies = tmdb.findMovies(query);
+        log.info("returned list of type MovieShort");
         List<MovieDTO> movieDTOs = new ArrayList<>();
         for(MovieShort movie : movies) {
             movieDTOs.add(new MovieShortConverter().entityToDto(movie));
         }
+        log.info("returned list of type MovieDTO");
         return movieDTOs;
-
     }
 
     public List<MovieShort> findMoviesByTitle(String title) {

@@ -30,14 +30,33 @@ public class MovieController {
     }
 
     @GetMapping("movies")
-    public String movieSearch(@RequestParam(name = "query", required = false)String query, Model model) {
-            log.info("loading movies page: " + movieHtmlPagePath + ".html");
-            if (query != null) {
-                List<MovieDTO> movieDTOS = movieService.findMoviesByQuery(query);
-                model.addAttribute("movies", movieDTOS);
-            }
-            return "movie/searchMovie";
+    public String movies() {
+        log.info("loading movies page: " + movieHtmlPagePath + ".html");
+        return "movie/searchMovie";
     }
+
+
+    @PostMapping("movies/testSearch")
+    public String movieSearch(@ModelAttribute("movieTitle") String title, Model model) {
+        log.info("movie search bar active");
+        log.info("move title from search bar: " + title);
+        List<MovieDTO> movieDTOS = movieService.findMoviesByQuery(title);
+        model.addAttribute("movieDTOS", movieDTOS);
+
+        if (!movieDTOS.isEmpty()) {
+            model.addAttribute("results_populated", true);
+            model.addAttribute("results_not_found", false);
+
+            model.addAttribute("moviesList", movieDTOS);
+        } else {
+            model.addAttribute("results_populated", false);
+            model.addAttribute("results_not_found", true);
+        }
+
+        return "movie/searchMovie";
+    }
+
+
 
     @PostMapping("movies/search")
     public String searchMovies(@ModelAttribute("movieTitle") String title, Model model) {
