@@ -1,6 +1,7 @@
 package com.sparta.movieplanner.justwatch.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.sparta.movieplanner.justwatch.dto.ProviderDTO;
 import com.sparta.movieplanner.justwatch.entity.Movie;
 import com.sparta.movieplanner.justwatch.entity.Provider;
 
@@ -13,5 +14,5 @@ public interface MovieService {
 
     Movie findMovieByTMDBId(int id) throws IOException, InterruptedException;
 
-    List<Provider> findAllProvidersForAMovieByTMDBId(int id) throws IOException, InterruptedException;
+    List<ProviderDTO> findAllProvidersForAMovieByTMDBId(int id) throws IOException, InterruptedException;
 }

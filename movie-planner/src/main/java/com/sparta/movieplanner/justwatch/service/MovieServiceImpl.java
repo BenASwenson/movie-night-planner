@@ -5,9 +5,11 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.VisibilityChecker;
+import com.sparta.movieplanner.justwatch.dto.ProviderDTO;
 import com.sparta.movieplanner.justwatch.entity.Movie;
 import com.sparta.movieplanner.justwatch.entity.Offers;
 import com.sparta.movieplanner.justwatch.entity.Provider;
+import com.sparta.movieplanner.justwatch.mappers.ProviderMapper;
 import com.sparta.movieplanner.justwatch.repository.ProviderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +30,9 @@ public class MovieServiceImpl implements MovieService {
 
     @Autowired
     private ProviderRepository providerRepository;
+
+    @Autowired
+    private ProviderMapper providerMapper;
     @Override
     public Movie findMovieByTitleAndReleaseYear(String title, int year) throws IOException, InterruptedException {
 
@@ -82,22 +87,23 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Provider> findAllProvidersForAMovieByTMDBId(int id) throws IOException, InterruptedException {
+    public List<ProviderDTO> findAllProvidersForAMovieByTMDBId(int id) throws IOException, InterruptedException {
 
         Movie movie = findMovieByTMDBId(id);
 
-        List<Provider> providers = new ArrayList<>();
+        List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
         if(movie.getOffers() == null || movie.getOffers().size() == 0) return providers;
         for(int i = 0; i < movie.getOffers().size(); i++){
             Offers offer = movie.getOffers().get(i);
 
             Provider provider = providerRepository.findById(movie.getOffers().get(i).getProvider_id()).get();
-            provider.setProvider_url(offer.getUrls().getRaw_web());
-            if(i > 0 && providers.get(providers.size()-1).getId() ==  provider.getId()){
-                providers.set(providers.size()-1, provider);
+            ProviderDTO providerDTO = providerMapper.entityToDto(provider);
+            providerDTO.setProvider_url(offer.getUrls().getRaw_web());
+            if(i > 0 && providers.get(providers.size()-1).getId() ==  providerDTO.getId()){
+                providers.set(providers.size()-1, providerDTO);
             }else{
-                providers.add(new Provider(provider));
+                providers.add(new ProviderDTO(providerDTO));
             }
         }
         return providers;
