@@ -51,5 +51,8 @@ body {
 
 .movie-image img {
     width: 25%;
-    height: 50%;
+}
+
+.search_results {
+    margin-left: 190px;
 }
