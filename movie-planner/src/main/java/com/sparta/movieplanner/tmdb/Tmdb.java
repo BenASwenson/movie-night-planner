@@ -52,6 +52,15 @@ public class Tmdb {
 
     }
 
+    public MovieDetail getMovieDetail(int movie_id) {
+        Mono<MovieDetail> result = client.get()
+                .uri("3/movie/{movie_id}?api_key={key}",
+                        movie_id, key)
+                .retrieve()
+                .bodyToMono(MovieDetail.class);
+        return result.block();
+    }
+
     /**
      * Retrieve all genres available in TMDB.
      *

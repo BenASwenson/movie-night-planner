@@ -23,8 +23,14 @@ public class TmdbApiTest {
         for (MovieShort s : results) {
             System.out.println("movie: " + s.getTitle()+ " id=" + s.getId());
         }
-
     }
+
+    @Test
+    void getMovieDetailTest() {
+        MovieDetail result = tmdb.getMovieDetail(11); // star wars
+        System.out.println(result);
+    }
+
     @Test
     void movieCreditResponseTest() {
         MovieCreditResponse credits = tmdb.findCreditsByMovieId(11);
