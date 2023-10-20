@@ -52,6 +52,17 @@ public class TvSeries {
         public void setProfile_path(String profile_path) {
             this.profile_path = profile_path;
         }
+
+        @Override
+        public String toString() {
+            return "Credit{" +
+                    "id=" + id +
+                    ", credit_id='" + credit_id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", gender=" + gender +
+                    ", profile_path='" + profile_path + '\'' +
+                    '}';
+        }
     }
 
     private ArrayList<Credit> created_by;
@@ -186,6 +197,14 @@ public class TvSeries {
         public void setStill_path(String still_path) {
             this.still_path = still_path;
         }
+
+        @Override
+        public String toString() {
+            return "Episode{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
     private Episode last_episode_to_air;
 
@@ -229,6 +248,14 @@ public class TvSeries {
 
         public void setOrigin_country(String origin_country) {
             this.origin_country = origin_country;
+        }
+
+        @Override
+        public String toString() {
+            return "Network{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
         }
     }
     private ArrayList<Network> networks;
@@ -281,6 +308,14 @@ public class TvSeries {
         public void setOrigin_country(String origin_country) {
             this.origin_country = origin_country;
         }
+
+        @Override
+        public String toString() {
+            return "Company{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
     private ArrayList<Company> production_companies;
 
@@ -302,6 +337,14 @@ public class TvSeries {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Country{" +
+                    "iso_3166_1='" + iso_3166_1 + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
         }
     }
 
@@ -380,6 +423,14 @@ public class TvSeries {
         public void setVote_average(double vote_average) {
             this.vote_average = vote_average;
         }
+
+        @Override
+        public String toString() {
+            return "Season{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
     private ArrayList<Season> seasons;
 
@@ -410,6 +461,14 @@ public class TvSeries {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Language{" +
+                    "english_name='" + english_name + '\'' +
+                    ", iso_639_1='" + iso_639_1 + '\'' +
+                    '}';
         }
     }
 
