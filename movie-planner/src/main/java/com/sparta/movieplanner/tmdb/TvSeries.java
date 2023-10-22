@@ -52,6 +52,17 @@ public class TvSeries {
         public void setProfile_path(String profile_path) {
             this.profile_path = profile_path;
         }
+
+        @Override
+        public String toString() {
+            return "Credit{" +
+                    "id=" + id +
+                    ", credit_id='" + credit_id + '\'' +
+                    ", name='" + name + '\'' +
+                    ", gender=" + gender +
+                    ", profile_path='" + profile_path + '\'' +
+                    '}';
+        }
     }
 
     private ArrayList<Credit> created_by;
@@ -186,6 +197,14 @@ public class TvSeries {
         public void setStill_path(String still_path) {
             this.still_path = still_path;
         }
+
+        @Override
+        public String toString() {
+            return "Episode{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
     private Episode last_episode_to_air;
 
@@ -230,6 +249,14 @@ public class TvSeries {
         public void setOrigin_country(String origin_country) {
             this.origin_country = origin_country;
         }
+
+        @Override
+        public String toString() {
+            return "Network{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
     private ArrayList<Network> networks;
 
@@ -244,44 +271,6 @@ public class TvSeries {
     private double popularity;
     private String poster_path;
 
-    public static class Company {
-        private int id;
-        private String logo_path;
-        private String name;
-        private String origin_country;
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
-        }
-
-        public String getLogo_path() {
-            return logo_path;
-        }
-
-        public void setLogo_path(String logo_path) {
-            this.logo_path = logo_path;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getOrigin_country() {
-            return origin_country;
-        }
-
-        public void setOrigin_country(String origin_country) {
-            this.origin_country = origin_country;
-        }
-    }
     private ArrayList<Company> production_companies;
 
     public static class Country {
@@ -302,6 +291,14 @@ public class TvSeries {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public String toString() {
+            return "Country{" +
+                    "iso_3166_1='" + iso_3166_1 + '\'' +
+                    ", name='" + name + '\'' +
+                    '}';
         }
     }
 
@@ -380,38 +377,16 @@ public class TvSeries {
         public void setVote_average(double vote_average) {
             this.vote_average = vote_average;
         }
+
+        @Override
+        public String toString() {
+            return "Season{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    '}';
+        }
     }
     private ArrayList<Season> seasons;
-
-    public static class Language {
-        private String english_name;
-        private String iso_639_1;
-        private String name;
-
-        public String getEnglish_name() {
-            return english_name;
-        }
-
-        public void setEnglish_name(String english_name) {
-            this.english_name = english_name;
-        }
-
-        public String getIso_639_1() {
-            return iso_639_1;
-        }
-
-        public void setIso_639_1(String iso_639_1) {
-            this.iso_639_1 = iso_639_1;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-    }
 
     private ArrayList<Language> spoken_languages;
 

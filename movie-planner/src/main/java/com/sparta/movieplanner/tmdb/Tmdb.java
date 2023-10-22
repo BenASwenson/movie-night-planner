@@ -52,6 +52,15 @@ public class Tmdb {
 
     }
 
+    public MovieDetail getMovieDetail(int movie_id) {
+        Mono<MovieDetail> result = client.get()
+                .uri("3/movie/{movie_id}?api_key={key}",
+                        movie_id, key)
+                .retrieve()
+                .bodyToMono(MovieDetail.class);
+        return result.block();
+    }
+
     /**
      * Retrieve all genres available in TMDB.
      *
@@ -111,9 +120,19 @@ public class Tmdb {
     }
 
 
-    // ToDo on Friday Morning:
-    //  https://developer.themoviedb.org/reference/tv-season-details
-    //  https://developer.themoviedb.org/reference/tv-episode-details
+    /* ToDo on Friday:
+       https://developer.themoviedb.org/reference/tv-season-details
+    */
+    public TvSeason getTvSeason(int seriesId, int seasonNumber) {
+        Mono<TvSeason> result = client.get()
+                .uri("/3/tv/{series_id}/season/{season_number}?api_key={key}",
+                        seriesId, seasonNumber, key)
+                .retrieve()
+                .bodyToMono(TvSeason.class);
+        return result.block();
+    }
+
+    // https://developer.themoviedb.org/reference/tv-episode-details
 
 
 }
