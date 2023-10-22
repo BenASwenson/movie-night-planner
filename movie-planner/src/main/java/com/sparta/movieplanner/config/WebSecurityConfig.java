@@ -32,7 +32,7 @@ public class WebSecurityConfig {
                 formLogin
                         .loginPage("/login")
                         .loginProcessingUrl("/perform_login")
-                        .defaultSuccessUrl("/homepage", true)
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/login?error=true")
                 );
 
@@ -40,7 +40,7 @@ public class WebSecurityConfig {
                 logout
                         .logoutUrl("/perform_logout")
                         .deleteCookies("JSESSIONID")
-                        .logoutSuccessUrl("/homepage?logout=true")
+                        .logoutSuccessUrl("/home?logout=true")
         );
 
 
