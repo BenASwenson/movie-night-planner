@@ -1,6 +1,5 @@
 package com.sparta.movieplanner.controllers.web;
 
-import com.sparta.movieplanner.entities.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -12,14 +11,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
-public class HomepageHandler {
+public class HomeController {
 
-    Logger log = LoggerFactory.getLogger(HomepageHandler.class);
+    Logger log = LoggerFactory.getLogger(HomeController.class);
 
-    @GetMapping("homepage")
+    @GetMapping("/home")
     public String homepage(@RequestParam(name = "logout", required = false) String logout, Model model, Authentication authentication) {
-        String homepage = "movie/searchMovie";
-        log.info("loading homepage: " + homepage + ".html");
+        String home = "home/home";
+        model.addAttribute("activePage", "home");
+        String activePage = (String) model.getAttribute("activePage");
+        log.info("Active Page: " + activePage);
+        log.info("loading homepage: " + home + ".html");
 
         if (logout != null) {
             log.info("Logout was successful");
@@ -34,6 +36,6 @@ public class HomepageHandler {
             model.addAttribute("authenticated", false);
         }
 
-        return homepage;
+        return home;
     }
 }
