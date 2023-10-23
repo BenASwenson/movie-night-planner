@@ -19,8 +19,8 @@ public class TmdbApiTest {
 
     @Test
     void queryTmdbMoviesTest() {
-        List<MovieShort> results = tmdb.findMovies("Star Wars");
-        for (MovieShort s : results) {
+        List<MediaShort> results = tmdb.findMovies("Star Wars");
+        for (MediaShort s : results) {
             System.out.println("movie: " + s.getTitle()+ " id=" + s.getId());
         }
     }
@@ -45,7 +45,7 @@ public class TmdbApiTest {
 
     @Test
     void getListOfTV() {
-        List<TvShort> results = tmdb.findTV("Friends");
+        List<MediaShort> results = tmdb.findTV("Friends");
         System.out.println(results);
     }
 

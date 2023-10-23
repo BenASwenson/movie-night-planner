@@ -2,7 +2,7 @@ package com.sparta.movieplanner.services;
 
 import com.sparta.movieplanner.converters.MovieShortConverter;
 import com.sparta.movieplanner.dto.MovieDTO;
-import com.sparta.movieplanner.tmdb.MovieShort;
+import com.sparta.movieplanner.tmdb.MediaShort;
 import com.sparta.movieplanner.tmdb.Tmdb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,21 +21,21 @@ public class MovieService {
     }
     public List<MovieDTO> findMoviesByQuery(String query) {
         log.info("findMoviesByQuery method is active");
-        List<MovieShort> movies = tmdb.findMovies(query);
+        List<MediaShort> movies = tmdb.findMovies(query);
         log.info("returned list of type MovieShort");
         List<MovieDTO> movieDTOs = new ArrayList<>();
-        for(MovieShort movie : movies) {
+        for(MediaShort movie : movies) {
             movieDTOs.add(new MovieShortConverter().entityToDto(movie));
         }
         log.info("returned list of type MovieDTO");
         return movieDTOs;
     }
 
-    public List<MovieShort> findMoviesByTitle(String title) {
+    public List<MediaShort> findMoviesByTitle(String title) {
         log.info("find movies by title method active");
         // TODO: Use Tmdb class to pull data from movie, credit, person and glue them together into a MovieDTO list.
 
-        List<MovieShort> movieShortList = tmdb.findMovies(title);
+        List<MediaShort> movieShortList = tmdb.findMovies(title);
 
 
         return movieShortList;
