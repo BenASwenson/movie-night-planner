@@ -17,7 +17,6 @@ import java.io.FileNotFoundException;
 import java.util.MissingResourceException;
 
 @RestControllerAdvice
-@EnableWebMvc
 @Order(value = Ordered.HIGHEST_PRECEDENCE)
 public class AdviseController {
     Logger log = LoggerFactory.getLogger(getClass());

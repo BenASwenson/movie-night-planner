@@ -134,20 +134,10 @@ public class TvShort {
     @Override
     public String toString() {
         return "TvShort{" +
-                "adult=" + adult +
-                ", backdrop_path='" + backdrop_path + '\'' +
-                ", genres_ids=" + genres_ids +
                 ", id=" + id +
-                ", origin_country=" + origin_country +
-                ", original_language='" + original_language + '\'' +
-                ", original_name='" + original_name + '\'' +
-                ", overview='" + overview + '\'' +
-                ", popularity=" + popularity +
-                ", poster_path='" + poster_path + '\'' +
-                ", first_air_date='" + first_air_date + '\'' +
                 ", name='" + name + '\'' +
-                ", vote_average=" + vote_average +
-                ", vote_count=" + vote_count +
+                ", popularity=" + popularity +
+                ", first_air_date='" + first_air_date + '\'' +
                 '}';
     }
 }
