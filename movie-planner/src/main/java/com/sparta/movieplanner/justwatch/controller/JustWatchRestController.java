@@ -27,7 +27,7 @@ public class JustWatchRestController {
     @Autowired
     private ProviderService providerService;
 
-    @GetMapping("movie")
+    @GetMapping("movies")
     public Movie getMovie(@RequestParam String title, @RequestParam int year) throws IOException, InterruptedException {
         System.out.println(title);
         System.out.println(year);
@@ -35,7 +35,7 @@ public class JustWatchRestController {
         return movieService.findMovieByTitleAndReleaseYear(title, year);
     }
 
-    @GetMapping("movie/providers")
+    @GetMapping("movies/providers")
     public List<ProviderDTO> getMovieProvidersByTMDBId(@RequestParam int id) throws IOException, InterruptedException {
         return movieService.findAllProvidersForAMovieByTMDBId(id);
     }
