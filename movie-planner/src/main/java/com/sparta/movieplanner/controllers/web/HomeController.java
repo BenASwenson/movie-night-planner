@@ -15,13 +15,14 @@ public class HomeController {
 
     Logger log = LoggerFactory.getLogger(HomeController.class);
 
+    private final String homeHtmlPagePath = "home/home";
+
     @GetMapping("/home")
-    public String homepage(@RequestParam(name = "logout", required = false) String logout, Model model, Authentication authentication) {
-        String home = "home/home";
+    public String home(@RequestParam(name = "logout", required = false) String logout, Model model, Authentication authentication) {
         model.addAttribute("activePage", "home");
         String activePage = (String) model.getAttribute("activePage");
         log.info("Active Page: " + activePage);
-        log.info("loading homepage: " + home + ".html");
+        log.info("loading homepage: " + homeHtmlPagePath + ".html");
 
         if (logout != null) {
             log.info("Logout was successful");
@@ -36,6 +37,30 @@ public class HomeController {
             model.addAttribute("authenticated", false);
         }
 
-        return home;
+        return homeHtmlPagePath;
     }
+
+    @GetMapping("movies/home")
+    public String showHomePage(@RequestParam(name = "logout", required = false) String logout, Authentication authentication, Model model) {
+        model.addAttribute("activePage", "home");
+        String activePage = (String) model.getAttribute("activePage");
+        String searchMovie = "movie/searchMovie";
+        log.info("Active Page: " + activePage);
+        log.info("loading home page: " + homeHtmlPagePath + ".html");
+
+        if (logout != null) {
+            log.info("Logout was successful");
+            model.addAttribute("logoutSuccess", true);
+        }
+        if (authentication != null) {
+            log.info("user is authenticated");
+            model.addAttribute("authenticated", true);
+        } else {
+            log.info("user is not authenticated or not logged in");
+            model.addAttribute("authenticated", false);
+        }
+        return searchMovie;
+    }
+
+
 }
