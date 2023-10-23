@@ -2,7 +2,7 @@ package com.sparta.movieplanner.controllers.web;
 
 import com.sparta.movieplanner.dto.MovieDTO;
 import com.sparta.movieplanner.services.MovieService;
-import com.sparta.movieplanner.tmdb.MovieShort;
+import com.sparta.movieplanner.tmdb.MediaShort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,7 +79,7 @@ public class MovieController {
         log.info("movie search bar active");
         log.info("move title from search bar: " + title);
 
-        List<MovieShort> moviesList = movieService.findMoviesByTitle(title);
+        List<MediaShort> moviesList = movieService.findMoviesByTitle(title);
 
         if (!moviesList.isEmpty()) {
             model.addAttribute("results_populated", true);

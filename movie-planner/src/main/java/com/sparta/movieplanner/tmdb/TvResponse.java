@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class TvResponse {
     private int page;
-    private ArrayList<TvShort> results;
+    private ArrayList<MediaShort> results;
     private int total_pages;
     private int total_results;
 
@@ -16,11 +16,11 @@ public class TvResponse {
         this.page = page;
     }
 
-    public ArrayList<TvShort> getResults() {
+    public ArrayList<MediaShort> getResults() {
         return results;
     }
 
-    public void setResults(ArrayList<TvShort> results) {
+    public void setResults(ArrayList<MediaShort> results) {
         this.results = results;
     }
 
