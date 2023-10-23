@@ -11,6 +11,8 @@ build:
         - echo "Maven build started"
         - cd movie-planner
         - "mvn clean package"
+    only:
+        - dev
 
 test:
     stage: test
