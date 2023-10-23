@@ -226,7 +226,7 @@ public class TvSeason {
     @Override
     public String toString() {
         return "TvSeason{" +
-                ", id=" + id +
+                " id=" + id +
                 ", name='" + name + '\'' +
                 ", season_number=" + season_number +
                 '}';
