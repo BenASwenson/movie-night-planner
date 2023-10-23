@@ -49,6 +49,7 @@ public class MovieController {
             model.addAttribute("authenticated", false);
         }
         return searchMovie;
+
     }
 
 
@@ -93,5 +94,8 @@ public class MovieController {
 
         return movieHtmlPagePath;
     }
+
+
+
 
 }
