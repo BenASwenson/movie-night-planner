@@ -9,6 +9,7 @@ import com.sparta.movieplanner.justwatch.service.ShowService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.List;
 
 @RestController
+@RequestMapping("/justwatch")
 public class JustWatchRestController {
 
     @Autowired
@@ -27,7 +29,7 @@ public class JustWatchRestController {
     @Autowired
     private ProviderService providerService;
 
-    @GetMapping("movie")
+    @GetMapping("movies")
     public Movie getMovie(@RequestParam String title, @RequestParam int year) throws IOException, InterruptedException {
         System.out.println(title);
         System.out.println(year);
@@ -35,7 +37,7 @@ public class JustWatchRestController {
         return movieService.findMovieByTitleAndReleaseYear(title, year);
     }
 
-    @GetMapping("movie/providers")
+    @GetMapping("movies/providers")
     public List<ProviderDTO> getMovieProvidersByTMDBId(@RequestParam int id) throws IOException, InterruptedException {
         return movieService.findAllProvidersForAMovieByTMDBId(id);
     }
@@ -45,7 +47,7 @@ public class JustWatchRestController {
         return showService.findAllShowProvidersByTMDBId(id);
     }
 
-    @GetMapping("/justwatch/providers")
+    @GetMapping("/providers")
     public List<Provider> getAllProviders(){
         return providerService.getAllProviders();
     }
@@ -53,9 +55,9 @@ public class JustWatchRestController {
     /*
         Only run when providers table needs to be updated. Delete and create table again before running this.
     */
-//    @GetMapping("/justwatch/providers/save")
-//    @Transactional
-//    public List<Provider> saveJustWatchProviders() throws IOException, InterruptedException {
-//        return providerService.saveAllProviders();
-//    }
+    @GetMapping("/providers/save")
+    @Transactional
+    public List<Provider> saveJustWatchProviders() throws IOException, InterruptedException {
+        return providerService.saveAllProviders();
+    }
 }
