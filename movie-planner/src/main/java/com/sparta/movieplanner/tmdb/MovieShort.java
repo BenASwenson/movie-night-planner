@@ -23,6 +23,23 @@ public class MovieShort {
     public MovieShort(int id, String title, String overview, String posterPath) {
     }
 
+    public MovieShort(int id, boolean adult, String backdrop_path, ArrayList<Integer> genre_ids, String title, String overview, String original_title, String original_language, double popularity, String poster_path, String release_date, boolean video, double vote_average, int vote_count) {
+        this.id = id;
+        this.adult = adult;
+        this.backdrop_path = backdrop_path;
+        this.genre_ids = genre_ids;
+        this.title = title;
+        this.overview = overview;
+        this.original_title = original_title;
+        this.original_language = original_language;
+        this.popularity = popularity;
+        this.poster_path = poster_path;
+        this.release_date = release_date;
+        this.video = video;
+        this.vote_average = vote_average;
+        this.vote_count = vote_count;
+    }
+
     public MovieShort(){}
 
     public int getId() {

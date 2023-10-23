@@ -8,6 +8,7 @@
     <title>Movie Night Planner - Movie Search</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/index.css" th:href="@{/static/index.css}">
+    <script type="text/javascript" src="/static/index.js"></script>
 </head>
 
 <body>
@@ -45,7 +46,7 @@
         <section th:if="${results_populated}">
             <h2 class="search_results">Search Results:</h2>
             <section th:each="movie : ${moviesList}" class="row">
-                <div class="col-md-8 offset-md-2 mt-4 mb-4">
+                <div class="col-md-8 offset-md-2 mt-4 mb-4 search-result">
                     <h3 th:text="${movie.title}"></h3>
                     <p th:text="${movie.overview}"></p>
 
@@ -53,8 +54,18 @@
                         <div class="movie-image">
                             <img th:src="'https://image.tmdb.org/t/p/original' + ${movie.poster_path}" alt="image goes here">
                         </div>
-
                     </div>
+                    <div class="mt-3">
+                        <button type="button" class="btn btn-dark more-info-btn">More Information</button>
+                    </div>
+                    <!-- Additional Information (Initially Hidden) -->
+                    <div class="additional-info" style="display: none;">
+                        <p>Popularity: <span class="popularity"></span></p>
+                        <p>Release Date: <span class="release-date"></span></p>
+                        <p>Vote Average: <span class="vote-average"></span></p>
+                        <p>Vote Count: <span class="vote-count"></span></p>
+                    </div>
+
                 </div>
             </section>
         </section>
