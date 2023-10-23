@@ -47,7 +47,7 @@ public class JustWatchRestController {
         return showService.findAllShowProvidersByTMDBId(id);
     }
 
-    @GetMapping("/justwatch/providers")
+    @GetMapping("/providers")
     public List<Provider> getAllProviders(){
         return providerService.getAllProviders();
     }
@@ -55,7 +55,7 @@ public class JustWatchRestController {
     /*
         Only run when providers table needs to be updated. Delete and create table again before running this.
     */
-    @GetMapping("/justwatch/providers/save")
+    @GetMapping("/providers/save")
     @Transactional
     public List<Provider> saveJustWatchProviders() throws IOException, InterruptedException {
         return providerService.saveAllProviders();
