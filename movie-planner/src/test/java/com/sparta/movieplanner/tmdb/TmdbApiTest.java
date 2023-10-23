@@ -51,13 +51,19 @@ public class TmdbApiTest {
 
     @Test
     void getTvSeries() {
-        TvSeries results = tmdb.getTvSeries(2);
+        TvSeries results = tmdb.getTvSeries(1668); // Friends
         System.out.println(results);
     }
 
     @Test
     void getTvSeason() {
         TvSeason result = tmdb.getTvSeason(121, 2); // Dr Who
+        System.out.println(result);
+    }
+
+    @Test
+    void getTvEpisodeDetail() {
+        TvEpisodeDetail result = tmdb.getTvEpisodeDetail(121, 2, 1);
         System.out.println(result);
     }
 }

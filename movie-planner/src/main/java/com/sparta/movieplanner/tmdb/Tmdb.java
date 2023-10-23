@@ -133,6 +133,13 @@ public class Tmdb {
     }
 
     // https://developer.themoviedb.org/reference/tv-episode-details
-
+    public TvEpisodeDetail getTvEpisodeDetail(int seriesId, int seasonNumber, int episodeNumber) {
+        Mono<TvEpisodeDetail> result = client.get()
+                .uri("/3/tv/{series_id}/season/{season_number}/episode/{episode_number}?api_key={key}",
+                        seriesId, seasonNumber, episodeNumber, key)
+                .retrieve()
+                .bodyToMono(TvEpisodeDetail.class);
+        return result.block();
+    }
 
 }
