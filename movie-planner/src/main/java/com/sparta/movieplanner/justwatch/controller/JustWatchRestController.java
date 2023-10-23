@@ -53,9 +53,9 @@ public class JustWatchRestController {
     /*
         Only run when providers table needs to be updated. Delete and create table again before running this.
     */
-//    @GetMapping("/justwatch/providers/save")
-//    @Transactional
-//    public List<Provider> saveJustWatchProviders() throws IOException, InterruptedException {
-//        return providerService.saveAllProviders();
-//    }
+    @GetMapping("/justwatch/providers/save")
+    @Transactional
+    public List<Provider> saveJustWatchProviders() throws IOException, InterruptedException {
+        return providerService.saveAllProviders();
+    }
 }
