@@ -23,6 +23,8 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
+
 @Service
 public class ShowServiceImpl implements ShowService{
 
@@ -47,6 +49,10 @@ public class ShowServiceImpl implements ShowService{
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+        if(response.statusCode() == 404){
+            throw new IllegalArgumentException();
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         // To bypass the exception ===> com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
@@ -58,7 +64,7 @@ public class ShowServiceImpl implements ShowService{
 
         List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
-        if(show.getOffers() == null || show.getOffers().size() == 0) return providers;
+        if(show.getOffers() == null || show.getOffers().size() == 0) throw new MissingResourceException("The show does not have providers", "Provider Class", "TMDB id: " + id);
         for(int i = 0; i < show.getOffers().size(); i++){
             Offers offer = show.getOffers().get(i);
 

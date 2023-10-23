@@ -11,8 +11,10 @@ import com.sparta.movieplanner.justwatch.entity.Offers;
 import com.sparta.movieplanner.justwatch.entity.Provider;
 import com.sparta.movieplanner.justwatch.mappers.ProviderMapper;
 import com.sparta.movieplanner.justwatch.repository.ProviderRepository;
+import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -22,6 +24,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.MissingResourceException;
 
 @Service
 public class MovieServiceImpl implements MovieService {
@@ -76,11 +79,16 @@ public class MovieServiceImpl implements MovieService {
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
+        if(response.statusCode() == 404){
+            throw new IllegalArgumentException();
+        }
+
         ObjectMapper mapper = new ObjectMapper();
         // To bypass the exception ===> com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
         // Map the endpoint response to the Movie entity (object)
+
         Movie movie = mapper.readValue(response.body(), new TypeReference<Movie>() {});
 
         return movie;
@@ -93,7 +101,7 @@ public class MovieServiceImpl implements MovieService {
 
         List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
-        if(movie.getOffers() == null || movie.getOffers().size() == 0) return providers;
+        if(movie.getOffers() == null || movie.getOffers().size() == 0) throw new MissingResourceException("The movie does not have providers", "Provider Class", "TMDB id: " + id);
         for(int i = 0; i < movie.getOffers().size(); i++){
             Offers offer = movie.getOffers().get(i);
 
