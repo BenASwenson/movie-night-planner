@@ -1,7 +1,7 @@
 package com.sparta.movieplanner.controllers.web;
 
 import com.sparta.movieplanner.services.TelevisionService;
-import com.sparta.movieplanner.tmdb.TvShort;
+import com.sparta.movieplanner.tmdb.MediaShort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -56,7 +56,7 @@ public class TelevisionController {
         log.info("television search bar active");
         log.info("television title from search bar: " + title);
 
-        List<TvShort> televisionList = televisionService.findTelevisionByTitle(title);
+        List<MediaShort> televisionList = televisionService.findTelevisionByTitle(title);
 
         if (!televisionList.isEmpty()) {
             model.addAttribute("results_populated", true);

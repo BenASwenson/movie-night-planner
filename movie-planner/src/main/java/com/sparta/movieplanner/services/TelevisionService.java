@@ -1,8 +1,7 @@
 package com.sparta.movieplanner.services;
 
-import com.sparta.movieplanner.tmdb.MovieShort;
+import com.sparta.movieplanner.tmdb.MediaShort;
 import com.sparta.movieplanner.tmdb.Tmdb;
-import com.sparta.movieplanner.tmdb.TvShort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -20,10 +19,10 @@ public class TelevisionService {
         this.tmdb = tmdb;
     }
 
-    public List<TvShort> findTelevisionByTitle(String title) {
+    public List<MediaShort> findTelevisionByTitle(String title) {
         log.info("find television by title method active");
 
-        List<TvShort> tvShortList = tmdb.findTV(title);
+        List<MediaShort> tvShortList = tmdb.findTV(title);
 
         return tvShortList;
     }
