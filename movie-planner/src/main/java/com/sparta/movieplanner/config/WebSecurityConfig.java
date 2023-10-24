@@ -24,7 +24,8 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests(auth -> {
             auth.requestMatchers("/perform_logout").authenticated();
-            auth.requestMatchers("/watchlist").authenticated();
+            auth.requestMatchers("/watchList").authenticated();
+            auth.requestMatchers("/calendar").authenticated();
             auth.anyRequest().permitAll();
         });
 
@@ -42,7 +43,6 @@ public class WebSecurityConfig {
                         .deleteCookies("JSESSIONID")
                         .logoutSuccessUrl("/home?logout=true")
         );
-
 
         return http.build();
     }
