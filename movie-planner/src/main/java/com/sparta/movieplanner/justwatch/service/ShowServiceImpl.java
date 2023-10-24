@@ -1,6 +1,7 @@
 package com.sparta.movieplanner.justwatch.service;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,8 +35,10 @@ public class ShowServiceImpl implements ShowService{
     private ProviderRepository providerRepository;
     @Autowired
     private ProviderMapper providerMapper;
+
     @Override
-    public List<ProviderDTO> findAllShowProvidersByTMDBId(int id) throws IOException, InterruptedException {
+    public Show findShowByTMDBId(int id) {
+
         String url = "https://apis.justwatch.com/contentpartner/v2/content/offers/object_type/show/id_type/tmdb/locale/en_GB?id=" + id + "&token=" + token;
 
         HttpClient client = HttpClient.newHttpClient();
@@ -46,8 +49,14 @@ public class ShowServiceImpl implements ShowService{
                 .uri(URI.create(url))
                 .build();
         // Store the endpoint response
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        HttpResponse<String> response;
+        try{
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        }catch (InterruptedException e){
+            throw new RuntimeException(e);
+        }catch (IOException e){
+            throw new RuntimeException(e);
+        }
 
         if(response.statusCode() == 404){
             throw new IllegalArgumentException();
@@ -58,7 +67,19 @@ public class ShowServiceImpl implements ShowService{
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
         mapper.setVisibility(VisibilityChecker.Std.defaultInstance().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
         // Map the endpoint response to the Movie entity (object)
-        Show show = mapper.readValue(response.body(), new TypeReference<Show>() {});
+        Show show;
+        try{
+            show = mapper.readValue(response.body(), new TypeReference<Show>() {});
+        }catch (JsonProcessingException e){
+            throw new RuntimeException(e);
+        }
+
+        return show;
+    }
+
+    @Override
+    public List<ProviderDTO> findAllShowProvidersByTMDBId(int id) {
+        Show show = findShowByTMDBId(id);
 
         System.out.println(show);
 
