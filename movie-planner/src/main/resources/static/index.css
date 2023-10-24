@@ -13,6 +13,8 @@ body {
 
 .image-container img {
     opacity: .09;
+    width: 400px;
+    height: auto;
 }
 
 
@@ -53,6 +55,10 @@ body {
     width: 25%;
 }
 
-.search_results {
-    margin-left: 190px;
+.h2-search-results {
+    text-align: left;
+}
+
+.search-result {
+    border: 2px solid black;
 }
