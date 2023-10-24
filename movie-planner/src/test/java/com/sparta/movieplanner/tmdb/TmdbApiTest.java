@@ -1,6 +1,8 @@
 package com.sparta.movieplanner.tmdb;
 
 import org.junit.jupiter.api.Test;
+
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class TmdbApiTest {
@@ -51,13 +53,13 @@ public class TmdbApiTest {
 
     @Test
     void getTvSeries() {
-        TvSeries results = tmdb.getTvSeries(1668); // Friends
+        TvSeries results = tmdb.getTvSeries(1668);
         System.out.println(results);
     }
 
     @Test
     void getTvSeason() {
-        TvSeason result = tmdb.getTvSeason(121, 2); // Dr Who
+        TvSeason result = tmdb.getTvSeason(121, 2);
         System.out.println(result);
     }
 
@@ -65,6 +67,13 @@ public class TmdbApiTest {
     void getTvEpisodeDetail() {
         TvEpisodeDetail result = tmdb.getTvEpisodeDetail(121, 2, 1);
         System.out.println(result);
+    }
+
+    @Test
+    void getTrendingTest() {
+        List<MediaShort> result = tmdb.getTrending();
+        System.out.println(result);
+
     }
 }
 
