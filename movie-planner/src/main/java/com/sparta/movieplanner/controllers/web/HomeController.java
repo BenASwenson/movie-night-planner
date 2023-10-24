@@ -1,7 +1,9 @@
 package com.sparta.movieplanner.controllers.web;
 
+import com.sparta.movieplanner.services.MovieService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,18 @@ public class HomeController {
     Logger log = LoggerFactory.getLogger(HomeController.class);
 
     private final String homeHtmlPagePath = "home/home";
+
+    @Autowired
+    private final MovieService movieService;
+
+    public HomeController(MovieService movieService) {
+        this.movieService = movieService;
+    }
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/home";
+    }
 
     @GetMapping("/home")
     public String home(@RequestParam(name = "logout", required = false) String logout, Model model, Authentication authentication) {
@@ -36,6 +50,9 @@ public class HomeController {
             log.info("user is not authenticated or not logged in");
             model.addAttribute("authenticated", false);
         }
+
+        var trending = movieService.getTrending();
+        model.addAttribute("trending", trending);
 
         return homeHtmlPagePath;
     }
