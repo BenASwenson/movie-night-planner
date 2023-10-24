@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 @Component
 public class Tmdb {
@@ -26,7 +27,7 @@ public class Tmdb {
      * @param query
      * @return list of movies
      */
-    public List<MovieShort> findMovies(String query) {
+    public List<MediaShort> findMovies(String query) {
 
         Mono<MovieResponse> result = client.get()
                 .uri("/3/search/movie?query={query}&include_adult=false&language=en-US&page=1&api_key={key}",
@@ -90,9 +91,7 @@ public class Tmdb {
 
     }
 
-
-    //  https://developer.themoviedb.org/reference/search-tv
-    public List<TvShort> findTV(String query) {
+    public List<MediaShort> findTV(String query) {
 
         Mono<TvResponse> result = client.get()
                 .uri("/3/search/tv?query={query}&include_adult=false&language=en-US&page=1&api_key={key}",
@@ -106,10 +105,6 @@ public class Tmdb {
         return response.getResults();
     }
 
-
-    //  https://developer.themoviedb.org/reference/tv-series-details
-
-
     public TvSeries getTvSeries(int id) {
         Mono<TvSeries> result = client.get()
                 .uri("/3/tv/{series_id}?api_key={key}",
@@ -119,10 +114,6 @@ public class Tmdb {
         return result.block();
     }
 
-
-    /* ToDo on Friday:
-       https://developer.themoviedb.org/reference/tv-season-details
-    */
     public TvSeason getTvSeason(int seriesId, int seasonNumber) {
         Mono<TvSeason> result = client.get()
                 .uri("/3/tv/{series_id}/season/{season_number}?api_key={key}",
@@ -132,7 +123,13 @@ public class Tmdb {
         return result.block();
     }
 
-    // https://developer.themoviedb.org/reference/tv-episode-details
-
-
+    public TvEpisodeDetail getTvEpisodeDetail(int seriesId, int seasonNumber, int episodeNumber) {
+        Mono<TvEpisodeDetail> result = client.get()
+                .uri("/3/tv/{series_id}/season/{season_number}/episode/{episode_number}?api_key={key}",
+                        seriesId, seasonNumber, episodeNumber, key)
+                .retrieve()
+                .bodyToMono(TvEpisodeDetail.class);
+        return result.block();
+    }
+    
 }

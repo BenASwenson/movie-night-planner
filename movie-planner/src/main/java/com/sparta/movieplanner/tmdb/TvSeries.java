@@ -203,6 +203,7 @@ public class TvSeries {
             return "Episode{" +
                     "id=" + id +
                     ", name='" + name + '\'' +
+                    ", season_number=" + season_number +
                     '}';
         }
     }
@@ -658,6 +659,7 @@ public class TvSeries {
         return "TvSeries{" +
                 ", id=" + id +
                 ", name='" + name + '\'' +
+                ", last_episode_to_air=" + last_episode_to_air +
                 '}';
     }
 }

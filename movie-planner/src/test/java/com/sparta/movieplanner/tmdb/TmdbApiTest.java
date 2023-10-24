@@ -19,8 +19,8 @@ public class TmdbApiTest {
 
     @Test
     void queryTmdbMoviesTest() {
-        List<MovieShort> results = tmdb.findMovies("Star Wars");
-        for (MovieShort s : results) {
+        List<MediaShort> results = tmdb.findMovies("Star Wars");
+        for (MediaShort s : results) {
             System.out.println("movie: " + s.getTitle()+ " id=" + s.getId());
         }
     }
@@ -45,19 +45,25 @@ public class TmdbApiTest {
 
     @Test
     void getListOfTV() {
-        List<TvShort> results = tmdb.findTV("Friends");
+        List<MediaShort> results = tmdb.findTV("Friends");
         System.out.println(results);
     }
 
     @Test
     void getTvSeries() {
-        TvSeries results = tmdb.getTvSeries(2);
+        TvSeries results = tmdb.getTvSeries(1668); // Friends
         System.out.println(results);
     }
 
     @Test
     void getTvSeason() {
         TvSeason result = tmdb.getTvSeason(121, 2); // Dr Who
+        System.out.println(result);
+    }
+
+    @Test
+    void getTvEpisodeDetail() {
+        TvEpisodeDetail result = tmdb.getTvEpisodeDetail(121, 2, 1);
         System.out.println(result);
     }
 }
