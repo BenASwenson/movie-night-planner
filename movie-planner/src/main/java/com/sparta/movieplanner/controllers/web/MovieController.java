@@ -33,7 +33,6 @@ public class MovieController {
     public String movies(@RequestParam(name = "logout", required = false) String logout, Authentication authentication, Model model) {
         model.addAttribute("activePage", "movies");
         String activePage = (String) model.getAttribute("activePage");
-        String searchMovie = "movie/searchMovie";
         log.info("Active Page: " + activePage);
         log.info("loading movies page: " + movieHtmlPagePath + ".html");
 
@@ -48,10 +47,8 @@ public class MovieController {
             log.info("user is not authenticated or not logged in");
             model.addAttribute("authenticated", false);
         }
-        return searchMovie;
-
+        return movieHtmlPagePath;
     }
-
 
     @PostMapping("movies/testSearch")
     public String movieSearch(@ModelAttribute("movieTitle") String title, Model model) {
@@ -78,14 +75,13 @@ public class MovieController {
     @PostMapping("movies/search")
     public String searchMovies(@ModelAttribute("movieTitle") String title, Model model) {
         log.info("movie search bar active");
-        log.info("move title from search bar: " + title);
+        log.info("movie title from search bar: " + title);
 
         List<MediaShort> moviesList = movieService.findMoviesByTitle(title);
 
         if (!moviesList.isEmpty()) {
             model.addAttribute("results_populated", true);
             model.addAttribute("results_not_found", false);
-
             model.addAttribute("moviesList", moviesList);
         } else {
             model.addAttribute("results_populated", false);

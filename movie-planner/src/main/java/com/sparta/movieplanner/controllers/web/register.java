@@ -42,7 +42,7 @@ public class register {
     public String registerNewUser(@ModelAttribute("user") UserDTO userDetails, Model model) {
         Optional<User> userExists = userRepository.findByUsername(userDetails.getUsername());
 
-        // for thymeleaf to show message if user already exists
+        // thymeleaf to show message if user already exists
         if (userExists.isPresent()) {
             model.addAttribute("doesUserAlreadyExist", true);
             model.addAttribute("userAlreadyExistsMsg", "Email is already registered: " + userExists.get().getUsername());
@@ -51,13 +51,6 @@ public class register {
         } else {
             model.addAttribute("doesUserAlreadyExist", false);
         }
-
-        // is this being transferred in the parameters?
-//        model.addAttribute("user", userDetails);
-
-        log.info("user = first name: {}", userDetails.getFirstName());
-        log.info("user = last name: {}", userDetails.getLastName());
-        log.info("user = username: {}", userDetails.getUsername());
 
         log.info("New user is being created");
         User newUser = registerService.createNewUser(userDetails);
@@ -73,6 +66,7 @@ public class register {
             model.addAttribute("registerUnsuccessful", false);
         }
 
+        // TODO: need to return a redirect to homepage
         return registerHtmlPagePath;
     }
 
