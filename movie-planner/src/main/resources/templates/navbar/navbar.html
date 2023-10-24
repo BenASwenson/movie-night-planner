@@ -8,8 +8,8 @@
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" th:href="@{home}">
-            <img src="/static/movieScreen.png" alt="screen logo" width="30" class="d-inline-block align-text-top">
+        <a class="navbar-brand" th:href="@{/home}">
+            <img src="/static/SpartaGlobalLogo.png" alt="Sparta Global" width="60" class="d-inline-block align-text-top me-2">
             Movie Night
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,28 +18,28 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'home' ? ' active' : ''}" th:href="@{home}">Home</a>
+                    <a class="nav-link" th:classappend="${activePage == 'home' ? ' active' : ''}" th:href="@{/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'movies' ? ' active' : ''}" th:href="@{movies}">Movies</a>
+                    <a class="nav-link" th:classappend="${activePage == 'movies' ? ' active' : ''}" th:href="@{/movies}">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'television' ? ' active' : ''}" th:href="@{television}">Television</a>
+                    <a class="nav-link" th:classappend="${activePage == 'television' ? ' active' : ''}" th:href="@{/television}">Television</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'genres' ? ' active' : ''}" th:href="@{genres}">Genres</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'watchList' ? ' active' : ''}" th:if="${authenticated}" th:href="@{watchList}">Watch List</a>
+                    <a class="nav-link" th:classappend="${activePage == 'genres' ? ' active' : ''}" th:href="@{/genres}">Genres</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:classappend="${activePage == 'calendar' ? ' active' : ''}" th:if="${authenticated}" th:href="@{calendar}">Calendar</a>
+                    <a class="nav-link" th:classappend="${activePage == 'watchList' ? ' active' : ''}" th:if="${authenticated}" th:href="@{/watchList}">Watch List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${activePage == 'calendar' ? ' active' : ''}" th:if="${authenticated}" th:href="@{/calendar}">Calendar</a>
                 </li>
 
                 <li class="nav-item" th:unless="${authenticated}">
-                    <button type="button" class="btn btn-outline-secondary btn-sm"><a class="nav-link" th:href="@{login}">Login / Register</a></button>
+                    <button type="button" class="btn btn-outline-secondary btn-sm"><a class="nav-link" th:href="@{/login}">Login / Register</a></button>
                 </li>
                 <form th:action="@{/perform_logout}" method="POST">
                     <button id="logoutButton" class="btn btn-outline-secondary btn-sm" th:if="${authenticated}">Logout</button>

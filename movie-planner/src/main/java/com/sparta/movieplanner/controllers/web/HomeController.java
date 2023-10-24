@@ -40,27 +40,5 @@ public class HomeController {
         return homeHtmlPagePath;
     }
 
-    @GetMapping("movies/home")
-    public String showHomePage(@RequestParam(name = "logout", required = false) String logout, Authentication authentication, Model model) {
-        model.addAttribute("activePage", "home");
-        String activePage = (String) model.getAttribute("activePage");
-        String searchMovie = "movie/searchMovie";
-        log.info("Active Page: " + activePage);
-        log.info("loading home page: " + homeHtmlPagePath + ".html");
-
-        if (logout != null) {
-            log.info("Logout was successful");
-            model.addAttribute("logoutSuccess", true);
-        }
-        if (authentication != null) {
-            log.info("user is authenticated");
-            model.addAttribute("authenticated", true);
-        } else {
-            log.info("user is not authenticated or not logged in");
-            model.addAttribute("authenticated", false);
-        }
-        return searchMovie;
-    }
-
 
 }
