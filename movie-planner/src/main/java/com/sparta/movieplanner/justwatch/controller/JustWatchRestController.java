@@ -3,15 +3,13 @@ package com.sparta.movieplanner.justwatch.controller;
 import com.sparta.movieplanner.justwatch.dto.ProviderDTO;
 import com.sparta.movieplanner.justwatch.entity.Movie;
 import com.sparta.movieplanner.justwatch.entity.Provider;
+import com.sparta.movieplanner.justwatch.entity.Show;
 import com.sparta.movieplanner.justwatch.service.MovieService;
 import com.sparta.movieplanner.justwatch.service.ProviderService;
 import com.sparta.movieplanner.justwatch.service.ShowService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,16 +28,23 @@ public class JustWatchRestController {
     private ProviderService providerService;
 
     @GetMapping("movies")
-    public Movie getMovie(@RequestParam String title, @RequestParam int year) throws IOException, InterruptedException {
-        System.out.println(title);
-        System.out.println(year);
+    public Movie getMovieByTitleAndReleaseYear(@RequestParam String title, @RequestParam int year) throws IOException, InterruptedException {
 
         return movieService.findMovieByTitleAndReleaseYear(title, year);
+    }
+    @GetMapping("movies/{id}")
+    public Movie getMovieByTMDBId(@PathVariable int id) throws IOException, InterruptedException {
+        return movieService.findMovieByTMDBId(id);
     }
 
     @GetMapping("movies/providers")
     public List<ProviderDTO> getMovieProvidersByTMDBId(@RequestParam int id) throws IOException, InterruptedException {
         return movieService.findAllProvidersForAMovieByTMDBId(id);
+    }
+
+    @GetMapping("show/{id}")
+    public Show getShowByTMDBId(@PathVariable int id){
+        return showService.findShowByTMDBId(id);
     }
 
     @GetMapping("show/providers")

@@ -41,7 +41,7 @@ public class AdviseController {
     }
     @ExceptionHandler(MissingResourceException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public String handlelMissingResourceException(MissingResourceException e) {
+    public String handleMissingResourceException(MissingResourceException e) {
         log.error("The object doesn't exist 404 Not Found",e);
         return "<h1>The Movie/Show you are looking for does not have providers...</h1>";
     }

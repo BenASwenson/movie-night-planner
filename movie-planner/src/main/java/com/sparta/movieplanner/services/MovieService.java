@@ -37,8 +37,16 @@ public class MovieService {
 
         List<MediaShort> movieShortList = tmdb.findMovies(title);
 
-
         return movieShortList;
+    }
+    
+    public List<MediaShort> getTrending() {
+        log.info("Requesting trending shows for last week.");
+        List<MediaShort> trending = tmdb.getTrending();
+        if (trending == null) {
+            log.warn("Failed retrieving trending movies from TMDB.");
+        }
+        return trending;
     }
 }
 

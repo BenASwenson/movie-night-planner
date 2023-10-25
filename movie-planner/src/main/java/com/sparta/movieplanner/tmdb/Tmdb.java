@@ -131,5 +131,27 @@ public class Tmdb {
                 .bodyToMono(TvEpisodeDetail.class);
         return result.block();
     }
-    
+
+    public static class RequestTrendingResponse {
+        public int page;
+        public ArrayList<MediaShort> results;
+        public int total_pages;
+        public long total_results;
+    }
+
+    public List<MediaShort> getTrending() {
+
+        Mono<RequestTrendingResponse> monoResponse = client.get()
+                .uri("/3/trending/all/week?language=en-US&api_key={key}",
+                        key)
+                .retrieve()
+                .bodyToMono(RequestTrendingResponse.class);
+        RequestTrendingResponse response = monoResponse.block();
+        if (response == null) {
+            return null;
+        }
+        return response.results;
+    }
+
+
 }
