@@ -36,6 +36,27 @@ public class WatchlistService {
         newWatchlistEntry.setType(Type.FILM);
         return newWatchlistEntry;
     }
-    
+
+    public List<MovieDetail> getMovieWatchlistByUserId(Long userId) {
+        List<Watchlist> userMovieWatchlist = findAllEntries_ByUserId(userId);
+        List<MovieDetail> movieList = new ArrayList<>();
+
+        for (Watchlist watchlist : userMovieWatchlist) {
+            int movieId = watchlist.getTitleId();
+            MovieDetail movieDetail = tmdb.getMovieDetail(movieId);
+
+
+            movieList.add(movieDetail);
+        }
+
+        return movieList;
+    }
+
+    public List<Watchlist> findAllEntries_ByUserId(Long userId) {
+        List<Watchlist> userWatchlist = watchlistRepository.findAllEntries_ByUserId(userId);
+
+        return userWatchlist;
+    }
+
 
 }

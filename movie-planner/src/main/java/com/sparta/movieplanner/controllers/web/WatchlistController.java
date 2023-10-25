@@ -56,6 +56,20 @@ public class WatchlistController {
             model.addAttribute("authenticated", false);
         }
 
+        User user = userRepository.findByUsername(authentication.getName()).get();
+        Long userId = user.getId();
+
+        List<MovieDetail> movieWatchlist = watchlistService.getMovieWatchlistByUserId(userId);
+
+        System.out.println(movieWatchlist);
+
+        if (!movieWatchlist.isEmpty()) {
+            model.addAttribute("movieWatchlist", movieWatchlist);
+            model.addAttribute("movieWatchlist_populated", true);
+        } else {
+            model.addAttribute("movieWatchlist_populated", false);
+        }
+
         return watchlistHtmlPagePath;
     }
 
