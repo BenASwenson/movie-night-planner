@@ -26,7 +26,7 @@ public class WebSecurityConfig {
             auth.requestMatchers("/perform_logout").authenticated();
             auth.requestMatchers("/watchList").authenticated();
             auth.requestMatchers("/calendar").authenticated();
-            auth.requestMatchers("/addToWatchlist").authenticated();
+            auth.requestMatchers("/addToWatchlist/**").authenticated();
             auth.anyRequest().permitAll();
         });
 

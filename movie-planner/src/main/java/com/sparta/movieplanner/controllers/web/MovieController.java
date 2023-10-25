@@ -24,7 +24,6 @@ public class MovieController {
     Logger log = LoggerFactory.getLogger(MovieController.class);
     private final String movieHtmlPagePath = "movie/searchMovie";
     private final MovieService movieService;
-    @Autowired
 
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
