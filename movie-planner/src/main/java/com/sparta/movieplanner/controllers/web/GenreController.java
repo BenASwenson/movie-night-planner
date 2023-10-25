@@ -1,7 +1,10 @@
 package com.sparta.movieplanner.controllers.web;
 
+import com.sparta.movieplanner.dto.GenreDTO;
+import com.sparta.movieplanner.services.GenreService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,11 +12,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/")
 public class GenreController {
 
     Logger log = LoggerFactory.getLogger(GenreController.class);
+
+    @Autowired
+    private GenreService genreService;
 
     @GetMapping("genres")
     public String searchGenres(@RequestParam(name="logout", required = false) String logout, Authentication authentication, Model model) {
@@ -34,6 +42,9 @@ public class GenreController {
             log.info("user is not authenticated or not logged in");
             model.addAttribute("authenticated", false);
         }
+
+        List<GenreDTO> genres = genreService.getAllGenres();
+        model.addAttribute("genres", genres);
 
         return searchGenres;
     }
