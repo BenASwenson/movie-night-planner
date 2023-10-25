@@ -20,6 +20,9 @@ public class Watchlist {
     @Column(name = "title", nullable = false)
     private String title;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "media_type", nullable = false)
+    private Type type;
 
 
     public Long getId() {
@@ -54,6 +57,14 @@ public class Watchlist {
         this.title = title;
     }
 
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
     @Override
     public String toString() {
         return "Watchlist{" +
@@ -61,6 +72,7 @@ public class Watchlist {
                 ", user=" + user +
                 ", titleId=" + titleId +
                 ", title='" + title + '\'' +
+                ", type=" + type +
                 '}';
     }
 }
