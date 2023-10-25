@@ -18,7 +18,7 @@ public class Watchlist {
     private int titleId;
 
     @Column(name = "title", nullable = false)
-    private String movieTitle;
+    private String title;
 
 
 
@@ -38,12 +38,20 @@ public class Watchlist {
         this.user = user;
     }
 
-    public String getMovieTitle() {
-        return movieTitle;
+    public int getTitleId() {
+        return titleId;
     }
 
-    public void setMovieTitle(String movieTitle) {
-        this.movieTitle = movieTitle;
+    public void setTitleId(int titleId) {
+        this.titleId = titleId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     @Override
@@ -51,7 +59,8 @@ public class Watchlist {
         return "Watchlist{" +
                 "id=" + id +
                 ", user=" + user +
-                ", movieTitle='" + movieTitle + '\'' +
+                ", titleId=" + titleId +
+                ", title='" + title + '\'' +
                 '}';
     }
 }
