@@ -25,8 +25,8 @@
         </div>
         <!-- Search result below -->
         <div class="row">
-            <section th:if="${watchlist_populated}">
-                <section th:each="movie : ${watchlist}" class="row">
+            <section th:if="${movieWatchlist_populated}">
+                <section th:each="movie : ${movieWatchlist}" class="row">
                     <div class="col-md-8 offset-md-2 mt-4 mb-4 search-result" th:attr="data-movie-id=${movie.id}">
                         <h3 th:text="${movie.title}"></h3>
                         <p th:text="${movie.overview}"></p>
