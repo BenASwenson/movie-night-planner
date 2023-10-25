@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import java.util.Optional;
 
 @Controller
-public class register {
+public class RegisterController {
     private final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
