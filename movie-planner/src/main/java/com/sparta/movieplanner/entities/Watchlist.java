@@ -14,8 +14,13 @@ public class Watchlist {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "movie_title", nullable = false)
+    @Column(name = "title_id", nullable = false)
+    private int titleId;
+
+    @Column(name = "title", nullable = false)
     private String movieTitle;
+
+
 
     public Long getId() {
         return id;
