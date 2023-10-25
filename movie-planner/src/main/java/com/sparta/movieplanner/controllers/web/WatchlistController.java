@@ -1,9 +1,13 @@
 package com.sparta.movieplanner.controllers.web;
 
+import com.sparta.movieplanner.entities.Type;
 import com.sparta.movieplanner.entities.User;
 import com.sparta.movieplanner.entities.Watchlist;
 import com.sparta.movieplanner.repositories.UserRepository;
 import com.sparta.movieplanner.repositories.WatchlistRepository;
+import com.sparta.movieplanner.services.WatchlistService;
+import com.sparta.movieplanner.tmdb.MediaShort;
+import com.sparta.movieplanner.tmdb.MovieDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +29,11 @@ public class WatchlistController {
     private final String watchlistHtmlPagePath = "watchList/watchList";
     private final String movieHtmlPagePath = "movie/searchMovie";
     @Autowired
-    private WatchlistRepository watchlistRepository;
+    WatchlistService watchlistService;
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private WatchlistRepository watchlistRepository;
 
 
     @GetMapping("watchList")
@@ -50,37 +56,21 @@ public class WatchlistController {
             model.addAttribute("authenticated", false);
         }
 
-        User user = userRepository.findByUsername(authentication.getName()).get();
-
-        List<Watchlist> watchlist = watchlistRepository.findAllByUserId(user.getId());
-
-        System.out.println(watchlist);
-
-        if (!watchlist.isEmpty()) {
-            // TODO: implement a for loop that goes through movies similar to movie controller
-            // TODO: implement a watchlist service
-            model.addAttribute("watchlist", watchlist);
-            model.addAttribute("watchlist_populated", true);
-        } else {
-            model.addAttribute("watchlist_populated", false);
-        }
-
         return watchlistHtmlPagePath;
     }
 
     @Transactional
-    @PostMapping("addToWatchlist")
-    public String addToWatchlist(@RequestParam("movieTitle") String movieTitle, Authentication authentication, Model model){
+    @PostMapping("addToWatchlist/movies")
+    public String addToWatchlist(@RequestParam("movieTitle") String movieTitle, @RequestParam("movieId") int movieId, Authentication authentication, Model model){
         log.info("addToWatchlist method active");
 
-        log.info("New watch list entry for: {} is being created", movieTitle);
-        Watchlist newWatchlistEntry = new Watchlist();
-        newWatchlistEntry.setId(0L);
-        newWatchlistEntry.setUser(userRepository.findByUsername(authentication.getName()).get());
-        newWatchlistEntry.setMovieTitle(movieTitle);
+        String username = authentication.getName();
+
+        log.info("New movie watchlist entry for: {} is being created", movieTitle);
+        Watchlist newWatchlistEntry = watchlistService.createMovieWatchlistEntry(movieTitle, movieId, username);
 
         Watchlist savedEntry = watchlistRepository.saveAndFlush(newWatchlistEntry);
-        log.info("New watch list entry saved, {}", savedEntry);
+        log.info("New movie watchlist entry saved, {}", savedEntry);
 
         if (watchlistRepository.findById(savedEntry.getId()).isPresent()) {
             model.addAttribute("addedToWatchlist", "Added To Watchlist");
@@ -89,5 +79,7 @@ public class WatchlistController {
 //        return "redirect:/movies";
         return watchlistHtmlPagePath;
     }
+
+
 
 }
