@@ -25,6 +25,7 @@ public class MovieController {
     private final String movieHtmlPagePath = "movie/searchMovie";
     private final MovieService movieService;
     @Autowired
+
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
@@ -40,6 +41,12 @@ public class MovieController {
             log.info("Logout was successful");
             model.addAttribute("logoutSuccess", true);
         }
+
+        /**
+         * Authentication section is being used to control navigation view to
+         * the watchlist and calendar tabs
+         */
+
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);
@@ -47,6 +54,7 @@ public class MovieController {
             log.info("user is not authenticated or not logged in");
             model.addAttribute("authenticated", false);
         }
+
         return movieHtmlPagePath;
     }
 

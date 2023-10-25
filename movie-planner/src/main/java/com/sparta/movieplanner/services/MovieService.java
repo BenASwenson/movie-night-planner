@@ -39,7 +39,7 @@ public class MovieService {
 
         return movieShortList;
     }
-    
+
     public List<MediaShort> getTrending() {
         log.info("Requesting trending shows for last week.");
         List<MediaShort> trending = tmdb.getTrending();

@@ -36,10 +36,12 @@ public class TelevisionController {
         log.info("Active Page: " + activePage);
         log.info("loading television search page: " + televisionHtmlPagePath + ".html");
 
-        if (logout != null) {
-            log.info("Logout was successful");
-            model.addAttribute("logoutSuccess", true);
-        }
+
+        /**
+         * Authentication section is being used to control navigation view to
+         * the watchlist and calendar tabs
+         */
+
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);

@@ -37,6 +37,11 @@ public class WatchlistController {
         log.info("Active Page: " + activePage);
         log.info("loading watchlist page: " + watchlistHtmlPagePath + ".html");
 
+        /**
+         * Authentication section is being used to control navigation view to
+         * the watchlist and calendar tabs
+         */
+
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);
@@ -48,6 +53,8 @@ public class WatchlistController {
         User user = userRepository.findByUsername(authentication.getName()).get();
 
         List<Watchlist> watchlist = watchlistRepository.findAllByUserId(user.getId());
+
+        System.out.println(watchlist);
 
         if (!watchlist.isEmpty()) {
             // TODO: implement a for loop that goes through movies similar to movie controller
