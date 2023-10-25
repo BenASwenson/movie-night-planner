@@ -178,12 +178,12 @@ public class MediaShort {
 
     @Override
     public String toString() {
-        return "MediaShort{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", name='" + name + '\'' +
-                ", overview='" + overview + '\'' +
-                ", media_type='" + media_type + '\'' +
-                '}';
+        return "MediaShort {" +
+                "\n  id=" + id +
+                "\n  title='" + title + '\'' +
+                "\n  name='" + name + '\'' +
+                "\n  overview='" + overview + '\'' +
+                "\n  media_type='" + media_type + '\'' +
+                "}\n";
     }
 }
