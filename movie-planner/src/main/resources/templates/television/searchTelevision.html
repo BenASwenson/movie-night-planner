@@ -50,9 +50,20 @@
                             <img th:src="'https://image.tmdb.org/t/p/original' + ${television.poster_path}" alt="image goes here">
                         </div>
                     </div>
-                    <div class="mt-3">
-                        <button type="button" class="btn btn-dark more-info-btn">More Information</button>
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col text-left">
+                                <button type="button" class="btn btn-dark more-info-btn">Show More</button>
+                            </div>
+                            <div class="col text-center">
+                                <button type="button" class="btn btn-outline-dark">Add to List</button>
+                            </div>
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-outline-dark">Add to Calendar</button>
+                            </div>
+                        </div>
                     </div>
+
                     <!-- Additional Information (Initially Hidden) -->
                     <div class="additional-info" style="display: none;">
                         <p>Popularity: <span class="popularity"></span></p>

@@ -1,8 +1,10 @@
 package com.sparta.movieplanner.tmdb;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TmdbApiTest {
@@ -73,7 +75,12 @@ public class TmdbApiTest {
     void getTrendingTest() {
         List<MediaShort> result = tmdb.getTrending();
         System.out.println(result);
+    }
 
+    @Test
+    void testFindShowsByGenre() {
+        List<MediaShort> result = tmdb.findMoviesByGenres(Lists.list(12,28));
+        System.out.println(result);
     }
 }
 

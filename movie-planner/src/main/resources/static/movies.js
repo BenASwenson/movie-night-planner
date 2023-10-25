@@ -19,12 +19,15 @@ document.addEventListener('DOMContentLoaded', function() {
             searchResult.querySelector('.vote-average').textContent = `${movieDetails.vote_average}`;
             searchResult.querySelector('.vote-count').textContent = `${movieDetails.vote_count}`;
 
+            // Mark as fetched
+            searchResult.dataset.fetched = true;
+
             // Toggle visibility of additional information
             const additionalInfo = searchResult.querySelector('.additional-info');
-            additionalInfo.style.display = 'block';
+            additionalInfo.style.display = additionalInfo.style.display === 'none' || additionalInfo.style.display === '' ? 'block' : 'none';
 
-            // Hide the More Information button after it's clicked
-            button.style.display = 'none';
+            // Change button text and functionality
+            button.textContent = additionalInfo.style.display === 'none' ? 'Show More' : 'Show Less';
 
         });
     });
