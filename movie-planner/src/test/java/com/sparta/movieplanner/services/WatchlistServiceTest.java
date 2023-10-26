@@ -5,6 +5,7 @@ import com.sparta.movieplanner.entities.User;
 import com.sparta.movieplanner.entities.Watchlist;
 import com.sparta.movieplanner.repositories.UserRepository;
 import com.sparta.movieplanner.repositories.WatchlistRepository;
+import com.sparta.movieplanner.tmdb.TvSeries;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,5 +71,15 @@ public class WatchlistServiceTest {
 
         System.out.println(movieList);
         assertTrue(movieList.size() == 1);
+    }
+
+    @Test
+    @DisplayName("Given a user id, return a list of tv series using tmdb api")
+    public void retrieveAllTvShows() {
+        List<TvSeries> tvShows = watchlistService.getTvShowWatchlistByUserId(2L);
+
+        System.out.println(tvShows);
+
+        assertTrue(!tvShows.isEmpty());
     }
 }

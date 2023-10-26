@@ -8,6 +8,7 @@ import com.sparta.movieplanner.repositories.WatchlistRepository;
 import com.sparta.movieplanner.services.WatchlistService;
 import com.sparta.movieplanner.tmdb.MediaShort;
 import com.sparta.movieplanner.tmdb.MovieDetail;
+import com.sparta.movieplanner.tmdb.TvSeries;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,28 +61,51 @@ public class WatchlistController {
         Long userId = user.getId();
 
         /**
-         * Returning a watchlist list of movies
+         * Returning a watchlist of movies
          * useful for a movie only filter
          */
         List<MovieDetail> movieWatchlist = watchlistService.getMovieWatchlistByUserId(userId);
 
-        /**
-         * Returning a watchlist list of tv shows
-         * useful for a tv show only filter
-         */
-
-        /**
-         * Returning a watchlist list of all entries
-         */
-
-        System.out.println(movieWatchlist);
-
         if (!movieWatchlist.isEmpty()) {
+            log.info("movieWatchlist: {}", movieWatchlist);
             model.addAttribute("movieWatchlist", movieWatchlist);
             model.addAttribute("movieWatchlist_populated", true);
         } else {
+            log.info("movieWatchlist is empty {}", movieWatchlist);
             model.addAttribute("movieWatchlist_populated", false);
         }
+
+        /**
+         * Returning a watchlist of tv shows
+         * useful for a tv show only filter
+         */
+        List<TvSeries> tvSeriesWatchlist = watchlistService.getTvShowWatchlistByUserId(userId);
+
+        if (!tvSeriesWatchlist.isEmpty()) {
+            log.info("tvSeriesWatchlist: {}", tvSeriesWatchlist);
+            model.addAttribute("tvSeriesWatchlist", tvSeriesWatchlist);
+            model.addAttribute("tvSeriesWatchlist_populated", true);
+        } else {
+            log.info("tvSeriesWatchlist is empty {}", tvSeriesWatchlist);
+            model.addAttribute("tvSeriesWatchlist_populated", false);
+        }
+
+        /**
+         * Returning a watchlist of all entries
+         */
+        List<MediaShort> allWatchList = watchlistService.getAllWatchlistByUserId(userId);
+
+        if (!allWatchList.isEmpty()) {
+            log.info("allWatchList: {}", allWatchList);
+            model.addAttribute("allWatchList", allWatchList);
+            model.addAttribute("allWatchList_populated", true);
+        } else {
+            log.info("allWatchList is empty {}", allWatchList);
+            model.addAttribute("allWatchList_populated", false);
+        }
+
+
+
 
         return watchlistHtmlPagePath;
     }
