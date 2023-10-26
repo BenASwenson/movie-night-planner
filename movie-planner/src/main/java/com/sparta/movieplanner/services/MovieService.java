@@ -6,8 +6,10 @@ import com.sparta.movieplanner.tmdb.MediaShort;
 import com.sparta.movieplanner.tmdb.Tmdb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,9 @@ import java.util.List;
 public class MovieService {
     Logger log = LoggerFactory.getLogger(getClass());
     private final Tmdb tmdb;
+
+    @Autowired
+    private com.sparta.movieplanner.justwatch.service.MovieService justWatchMovieService;
 
     public MovieService(Tmdb tmdb) {
         this.tmdb = tmdb;
@@ -31,12 +36,17 @@ public class MovieService {
         return movieDTOs;
     }
 
-    public List<MediaShort> findMoviesByTitle(String title) {
+    public List<MediaShort> findMoviesByTitle(String title) throws IOException, InterruptedException {
         log.info("find movies by title method active");
         // TODO: Use Tmdb class to pull data from movie, credit, person and glue them together into a MovieDTO list.
 
         List<MediaShort> movieShortList = tmdb.findMovies(title);
 
+        // Find all providers for each movie and add it to the list
+        for(int i = 0; i < movieShortList.size(); i++){
+            int tmdbId = movieShortList.get(i).getId();
+            movieShortList.get(i).setProviders(justWatchMovieService.findAllProvidersForAMovieByTMDBId(tmdbId));
+        }
         return movieShortList;
     }
 

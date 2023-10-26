@@ -80,7 +80,8 @@ public class MovieServiceImpl implements MovieService {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
         if(response.statusCode() == 404){
-            throw new IllegalArgumentException();
+            return null;
+            //throw new IllegalArgumentException();
         }
 
         ObjectMapper mapper = new ObjectMapper();
@@ -101,7 +102,7 @@ public class MovieServiceImpl implements MovieService {
 
         List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
-        if(movie.getOffers() == null || movie.getOffers().size() == 0) throw new MissingResourceException("The movie does not have providers", "Provider Class", "TMDB id: " + id);
+        if(movie == null || movie.getOffers() == null || movie.getOffers().size() == 0) return null; //throw new MissingResourceException("The movie does not have providers", "Provider Class", "TMDB id: " + id);
         for(int i = 0; i < movie.getOffers().size(); i++){
             Offers offer = movie.getOffers().get(i);
 
