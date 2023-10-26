@@ -44,6 +44,7 @@ public class MovieService {
 
         // Find all providers for each movie and add it to the list
         for(int i = 0; i < movieShortList.size(); i++){
+            log.info("finding movie providers for: {}", movieShortList.get(i).getId());
             int tmdbId = movieShortList.get(i).getId();
             movieShortList.get(i).setProviders(justWatchMovieService.findAllProvidersForAMovieByTMDBId(tmdbId));
         }
