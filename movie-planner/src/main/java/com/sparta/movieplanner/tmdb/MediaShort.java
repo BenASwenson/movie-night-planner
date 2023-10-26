@@ -1,6 +1,9 @@
 package com.sparta.movieplanner.tmdb;
 
+import com.sparta.movieplanner.justwatch.dto.ProviderDTO;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class MediaShort {
 
@@ -24,6 +27,7 @@ public class MediaShort {
     private int vote_count;
     private String media_type;
 
+    private List<ProviderDTO> providers;
     public ArrayList<Integer> getGenres_ids() {
         return genres_ids;
     }
@@ -176,14 +180,22 @@ public class MediaShort {
         this.media_type = media_type;
     }
 
+    public List<ProviderDTO> getProviders() {
+        return providers;
+    }
+
+    public void setProviders(List<ProviderDTO> providers) {
+        this.providers = providers;
+    }
+
     @Override
     public String toString() {
         return "MediaShort{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
-                ", name='" + name + '\'' +
                 ", overview='" + overview + '\'' +
                 ", media_type='" + media_type + '\'' +
+                ", providers=" + providers +
                 '}';
     }
 }

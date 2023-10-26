@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -75,12 +76,15 @@ public class MovieController {
 
 
     @PostMapping("movies/search")
-    public String searchMovies(@ModelAttribute("movieTitle") String title, Model model) {
+    public String searchMovies(@ModelAttribute("movieTitle") String title, Model model) throws IOException, InterruptedException {
         log.info("movie search bar active");
         log.info("movie title from search bar: " + title);
 
         List<MediaShort> moviesList = movieService.findMoviesByTitle(title);
-
+        //System.out.println(moviesList);
+        for(int i = 0; i < moviesList.size(); i++){
+            System.out.println(moviesList.get(i));
+        }
         if (!moviesList.isEmpty()) {
             model.addAttribute("results_populated", true);
             model.addAttribute("results_not_found", false);
