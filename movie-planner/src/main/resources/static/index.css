@@ -63,4 +63,22 @@ body {
     border: 2px solid black;
 }
 
+.divScroll {
+    overflow:auto;
+    white-space: nowrap;
+    margin-top: 20px;
+
+}
+
+.provider {
+    display: inline-block;
+    max-height:50%;
+    max-width:50%;
+}
+
+.providerImage{
+    border-radius: 10%;
+    margin-right: 10px;
+}
+
 

@@ -90,8 +90,7 @@ public class WatchlistController {
             model.addAttribute("addedToWatchlist", "Added To Watchlist");
         }
 
-//        return "redirect:/movies";
-        return watchlistHtmlPagePath;
+        return "redirect:/watchList";
     }
 
 
