@@ -86,7 +86,7 @@ public class MovieController {
         log.info("movie title from search bar: " + title);
 
         List<MediaShort> moviesList = movieService.findMoviesByTitle(title);
-        //System.out.println(moviesList);
+
         for(int i = 0; i < moviesList.size(); i++){
             System.out.println(moviesList.get(i));
         }

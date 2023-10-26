@@ -28,6 +28,7 @@ public class WatchlistService {
     private UserRepository userRepository;
 
     public Watchlist createMovieWatchlistEntry(String movieTitle, int movieId, String username ) {
+        log.info("create movie watchlist entry method active");
         Watchlist newWatchlistEntry = new Watchlist();
         newWatchlistEntry.setId(0L);
         newWatchlistEntry.setUser(userRepository.findByUsername(username).get());
@@ -50,6 +51,17 @@ public class WatchlistService {
         }
 
         return movieList;
+    }
+
+    public Watchlist createTvShowWatchlistEntry(String tvShowTitle, int tvShowId, String username ) {
+        log.info("create tv show watchlist entry method active");
+        Watchlist newWatchlistEntry = new Watchlist();
+        newWatchlistEntry.setId(0L);
+        newWatchlistEntry.setUser(userRepository.findByUsername(username).get());
+        newWatchlistEntry.setTitleId(tvShowId);
+        newWatchlistEntry.setTitle(tvShowTitle);
+        newWatchlistEntry.setType(Type.TV_SHOW);
+        return newWatchlistEntry;
     }
 
     public List<Watchlist> findAllEntries_ByUserId(Long userId) {

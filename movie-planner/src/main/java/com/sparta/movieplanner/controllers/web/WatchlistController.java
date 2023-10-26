@@ -59,7 +59,20 @@ public class WatchlistController {
         User user = userRepository.findByUsername(authentication.getName()).get();
         Long userId = user.getId();
 
+        /**
+         * Returning a watchlist list of movies
+         * useful for a movie only filter
+         */
         List<MovieDetail> movieWatchlist = watchlistService.getMovieWatchlistByUserId(userId);
+
+        /**
+         * Returning a watchlist list of tv shows
+         * useful for a tv show only filter
+         */
+
+        /**
+         * Returning a watchlist list of all entries
+         */
 
         System.out.println(movieWatchlist);
 
@@ -75,8 +88,8 @@ public class WatchlistController {
 
     @Transactional
     @PostMapping("addToWatchlist/movies")
-    public String addToWatchlist(@RequestParam("movieTitle") String movieTitle, @RequestParam("movieId") int movieId, Authentication authentication, Model model){
-        log.info("addToWatchlist method active");
+    public String addMoviesToWatchlist(@RequestParam("movieTitle") String movieTitle, @RequestParam("movieId") int movieId, Authentication authentication, Model model){
+        log.info("addToWatchlist movie method active");
 
         String username = authentication.getName();
 
@@ -85,6 +98,26 @@ public class WatchlistController {
 
         Watchlist savedEntry = watchlistRepository.saveAndFlush(newWatchlistEntry);
         log.info("New movie watchlist entry saved, {}", savedEntry);
+
+        if (watchlistRepository.findById(savedEntry.getId()).isPresent()) {
+            model.addAttribute("addedToWatchlist", "Added To Watchlist");
+        }
+
+        return "redirect:/watchList";
+    }
+
+    @Transactional
+    @PostMapping("addToWatchlist/shows")
+    public String addShowsToWatchlist(@RequestParam("tvShowTitle") String tvShowTitle, @RequestParam("tvShowId") int tvShowId, Authentication authentication, Model model){
+        log.info("addToWatchlist tv shows method active");
+
+        String username = authentication.getName();
+
+        log.info("New tv show watchlist entry for: {} is being created", tvShowTitle);
+        Watchlist newWatchlistEntry = watchlistService.createTvShowWatchlistEntry(tvShowTitle, tvShowId, username);
+
+        Watchlist savedEntry = watchlistRepository.saveAndFlush(newWatchlistEntry);
+        log.info("New tv show watchlist entry saved, {}", savedEntry);
 
         if (watchlistRepository.findById(savedEntry.getId()).isPresent()) {
             model.addAttribute("addedToWatchlist", "Added To Watchlist");
