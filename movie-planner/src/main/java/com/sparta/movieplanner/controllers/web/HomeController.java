@@ -58,6 +58,7 @@ public class HomeController {
         var trending = movieService.getTrending();
         model.addAttribute("trending", trending);
 
+
         return homeHtmlPagePath;
     }
 

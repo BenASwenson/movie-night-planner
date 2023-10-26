@@ -47,7 +47,13 @@
                             <button type="button" class="btn btn-dark more-info-btn">Show More</button>
                         </div>
                         <div class="col text-center">
-                            <button type="button" class="btn btn-outline-dark">Add to List</button>
+                            <!-- Watchlist Button -->
+                            <form th:action="@{/addToWatchlist}" method="POST">
+                                <input type="hidden" name="title" th:value="${show.title}" />
+                                <input type="hidden" name="id" th:value="${show.id}" />
+                                <input type="hidden" name="mediaType" th:value="${show.media_type}" />
+                                <button type="submit" class="btn btn-outline-dark">Add To Watchlist</button>
+                            </form>
                         </div>
                         <div class="col text-right">
                             <button type="button" class="btn btn-outline-dark">Add to Calendar</button>
