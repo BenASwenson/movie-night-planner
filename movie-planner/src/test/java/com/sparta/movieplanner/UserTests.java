@@ -38,7 +38,7 @@ public class UserTests {
 
     /**
      * COMMENTED TEST IS A WORK IN PROGRESS
-     * I tried my hand at a mock test for registering a user but I'm failing after the save step as it said it's null.
+     * I tried my hand at a mock test for registering a user, but I'm failing after the save step as it said it's null.
      * Need to do more research on mockito so the test is commented out for now.
      */
 
