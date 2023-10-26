@@ -132,7 +132,7 @@ public class WatchlistController {
 
     @Transactional
     @PostMapping("addToWatchlist/shows")
-    public String addShowsToWatchlist(@RequestParam("tvShowTitle") String tvShowTitle, @RequestParam("tvShowId") int tvShowId, Authentication authentication, Model model){
+    public String addShowsToWatchlist(@RequestParam("tvShowTitle") String tvShowTitle, @RequestParam("tvShowId") int tvShowId, Authentication authentication, Model model) {
         log.info("addToWatchlist tv shows method active");
 
         String username = authentication.getName();
@@ -148,6 +148,46 @@ public class WatchlistController {
         }
 
         return "redirect:/watchList";
+    }
+
+    @Transactional
+    @PostMapping("addToWatchlist")
+    public String addToWatchlist(@RequestParam("title") String title, @RequestParam("id") int titleId, @RequestParam("mediaType") String mediaType, Authentication authentication, Model model) {
+        log.info("addToWatchlist landing page method active");
+
+
+        String username = authentication.getName();
+
+        log.info("media type is: {}", mediaType);
+
+
+        if (mediaType.equals("movie")) {
+            log.info("New movie watchlist entry for: {} is being created", title);
+            Watchlist newWatchlistEntry = watchlistService.createMovieWatchlistEntry(title, titleId, username);
+
+            Watchlist savedEntry = watchlistRepository.saveAndFlush(newWatchlistEntry);
+            log.info("New movie watchlist entry saved, {}", savedEntry);
+
+            if (watchlistRepository.findById(savedEntry.getId()).isPresent()) {
+                model.addAttribute("addedToWatchlist", "Added To Watchlist");
+            }
+        }
+
+        if (mediaType.equals("tv")) {
+            log.info("New tv show watchlist entry for: {} is being created", title);
+            Watchlist newWatchlistEntry = watchlistService.createTvShowWatchlistEntry(title, titleId, username);
+
+            Watchlist savedEntry = watchlistRepository.saveAndFlush(newWatchlistEntry);
+            log.info("New tv show watchlist entry saved, {}", savedEntry);
+
+            if (watchlistRepository.findById(savedEntry.getId()).isPresent()) {
+                model.addAttribute("addedToWatchlist", "Added To Watchlist");
+            }
+        }
+
+        return "redirect:/watchList";
+
+
     }
 
 
