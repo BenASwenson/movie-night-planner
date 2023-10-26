@@ -55,13 +55,20 @@
                             <img th:src="'https://image.tmdb.org/t/p/original' + ${movie.poster_path}" alt="image goes here">
                         </div>
                     </div>
+
                     <div class="container mt-3">
                         <div class="row">
                             <div class="col text-left">
                                 <button type="button" class="btn btn-dark more-info-btn">Show More</button>
                             </div>
+
                             <div class="col text-center">
-                                <button type="button" class="btn btn-outline-dark">Add to List</button>
+                                <!-- Watchlist Button -->
+                                <form th:action="@{/addToWatchlist/movies}" method="POST">
+                                    <input type="hidden" name="movieTitle" th:value="${movie.title}" />
+                                    <input type="hidden" name="movieId" th:value="${movie.id}" />
+                                    <button type="submit" class="btn btn-outline-dark">Add To Watchlist</button>
+                                </form>
                             </div>
                             <div class="col text-right">
                                 <button type="button" class="btn btn-outline-dark">Add to Calendar</button>
@@ -83,6 +90,9 @@
                             </div>
                             <div class="col">
                                 <p>Vote Count: <span class="vote-count"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Watch: <span class="watch_providers"></span></p>
                             </div>
                         </div>
                     </div>

@@ -37,7 +37,6 @@ public class MovieService {
 
         List<MediaShort> movieShortList = tmdb.findMovies(title);
 
-
         return movieShortList;
     }
 

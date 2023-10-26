@@ -43,6 +43,10 @@ public class HomeController {
             model.addAttribute("logoutSuccess", true);
         }
 
+        /**
+         * Authentication section is being used to control navigation view to
+         * the watchlist and calendar tabs
+         */
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);

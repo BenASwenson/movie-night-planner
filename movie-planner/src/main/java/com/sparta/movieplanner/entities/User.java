@@ -74,12 +74,11 @@ public class User implements UserDetails {
 
     @Override
     public String toString() {
-        return String.format("Users{id: %s, firstName: %s, lastName: %s, username: %s, password: %s, role: %s}",
+        return String.format("Users{id: %s, firstName: %s, lastName: %s, username: %s, role: %s}",
                 id,
                 firstName,
                 lastName,
                 username,
-                password,
                 role);
     }
 
