@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.assertTrue;
@@ -16,7 +17,7 @@ public class MovieServiceTest {
     MovieService movieService;
     @Test
     @DisplayName("Given a search query (movie title), return a list of movies containing the query")
-    public void findListOfMoviesByTitle() {
+    public void findListOfMoviesByTitle() throws IOException, InterruptedException {
         List<MediaShort> movieLists = movieService.findMoviesByTitle("Star Wars");
 
         assertTrue(movieLists.size() > 0);
