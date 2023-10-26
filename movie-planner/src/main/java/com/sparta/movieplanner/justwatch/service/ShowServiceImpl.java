@@ -59,7 +59,7 @@ public class ShowServiceImpl implements ShowService{
         }
 
         if(response.statusCode() == 404){
-            throw new IllegalArgumentException();
+            return null;
         }
 
         ObjectMapper mapper = new ObjectMapper();
@@ -85,10 +85,12 @@ public class ShowServiceImpl implements ShowService{
 
         List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
-        if(show.getOffers() == null || show.getOffers().size() == 0) throw new MissingResourceException("The show does not have providers", "Provider Class", "TMDB id: " + id);
+        if(show.getOffers() == null || show.getOffers().size() == 0) return null;//throw new MissingResourceException("The show does not have providers", "Provider Class", "TMDB id: " + id);
         for(int i = 0; i < show.getOffers().size(); i++){
             Offers offer = show.getOffers().get(i);
-
+            if(!providerRepository.findById(show.getOffers().get(i).getProvider_id()).isPresent()){
+                continue;
+            }
             Provider provider = providerRepository.findById(show.getOffers().get(i).getProvider_id()).get();
             ProviderDTO providerDTO = providerMapper.entityToDto(provider);
             providerDTO.setProvider_url(offer.getUrls().getRaw_web());
