@@ -65,7 +65,7 @@ public class WatchlistService {
     }
 
     public List<Watchlist> findAllEntries_ByUserId(Long userId) {
-        List<Watchlist> userWatchlist = watchlistRepository.findAllEntries_ByUserId(userId);
+        List<Watchlist> userWatchlist = watchlistRepository.findAllByUserId(userId);
 
         return userWatchlist;
     }
