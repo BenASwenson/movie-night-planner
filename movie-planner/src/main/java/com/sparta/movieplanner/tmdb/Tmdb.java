@@ -153,6 +153,7 @@ public class Tmdb {
         return response.results;
     }
 
+    // https://developer.themoviedb.org/reference/discover-movie
     public List<MediaShort> findMoviesByGenres(List<Integer> genreList) {
         StringBuilder genres = new StringBuilder();
 
