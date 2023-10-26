@@ -67,7 +67,7 @@ public class RegisterController {
         }
 
         // TODO: need to return a redirect to homepage
-        return registerHtmlPagePath;
+        return "redirect:/login";
     }
 
     private void initializePageModel(Model model) {
