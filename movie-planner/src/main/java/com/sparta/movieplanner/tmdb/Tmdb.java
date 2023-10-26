@@ -29,12 +29,12 @@ public class Tmdb {
      */
     public List<MediaShort> findMovies(String query) {
 
-        Mono<MovieResponse> result = client.get()
+        Mono<MediaResponse> result = client.get()
                 .uri("/3/search/movie?query={query}&include_adult=false&language=en-US&page=1&api_key={key}",
                         query, key)
                 .retrieve()
-                .bodyToMono(MovieResponse.class);
-        MovieResponse response = result.block();
+                .bodyToMono(MediaResponse.class);
+        MediaResponse response = result.block();
         if (response == null) {
             return null;
         }
@@ -150,6 +150,29 @@ public class Tmdb {
         if (response == null) {
             return null;
         }
+        return response.results;
+    }
+
+    public List<MediaShort> findMoviesByGenres(List<Integer> genreList) {
+        StringBuilder genres = new StringBuilder();
+
+        for (int i=0; i<genreList.size(); i++) {
+            genres.append(genreList.get(i).toString());
+            if (i< genreList.size() -1) {
+                genres.append("|"); // | means OR
+            }
+        }
+
+        MediaResponse response = client.get()
+                .uri("/3/discover/movie?with_genres={genres}&api_key={key}",
+                        genres.toString(), key)
+                .retrieve()
+                .bodyToMono(MediaResponse.class)
+                .block();
+        if (response == null) {
+            return null;
+        }
+
         return response.results;
     }
 

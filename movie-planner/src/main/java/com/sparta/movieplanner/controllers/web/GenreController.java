@@ -23,10 +23,10 @@ public class GenreController {
         log.info("Active Page: " + activePage);
         log.info("loading genres search page: " + searchGenres + ".html");
 
-        if (logout != null) {
-            log.info("Logout was successful");
-            model.addAttribute("logoutSuccess", true);
-        }
+        /**
+         * Authentication section is being used to control navigation view to
+         * the watchlist and calendar tabs
+         */
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);
@@ -34,6 +34,7 @@ public class GenreController {
             log.info("user is not authenticated or not logged in");
             model.addAttribute("authenticated", false);
         }
+
         return searchGenres;
     }
 }

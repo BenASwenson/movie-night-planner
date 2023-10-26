@@ -42,11 +42,11 @@ public class MovieService {
 
         List<MediaShort> movieShortList = tmdb.findMovies(title);
 
+        // Find all providers for each movie and add it to the list
         for(int i = 0; i < movieShortList.size(); i++){
             int tmdbId = movieShortList.get(i).getId();
             movieShortList.get(i).setProviders(justWatchMovieService.findAllProvidersForAMovieByTMDBId(tmdbId));
         }
-
         return movieShortList;
     }
 

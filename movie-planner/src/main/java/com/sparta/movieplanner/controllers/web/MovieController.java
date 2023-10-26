@@ -25,7 +25,7 @@ public class MovieController {
     Logger log = LoggerFactory.getLogger(MovieController.class);
     private final String movieHtmlPagePath = "movie/searchMovie";
     private final MovieService movieService;
-    @Autowired
+
     public MovieController(MovieService movieService) {
         this.movieService = movieService;
     }
@@ -41,6 +41,12 @@ public class MovieController {
             log.info("Logout was successful");
             model.addAttribute("logoutSuccess", true);
         }
+
+        /**
+         * Authentication section is being used to control navigation view to
+         * the watchlist and calendar tabs
+         */
+
         if (authentication != null) {
             log.info("user is authenticated");
             model.addAttribute("authenticated", true);
@@ -48,10 +54,9 @@ public class MovieController {
             log.info("user is not authenticated or not logged in");
             model.addAttribute("authenticated", false);
         }
+
         return movieHtmlPagePath;
-
     }
-
 
     @PostMapping("movies/testSearch")
     public String movieSearch(@ModelAttribute("movieTitle") String title, Model model) {
@@ -88,7 +93,6 @@ public class MovieController {
         if (!moviesList.isEmpty()) {
             model.addAttribute("results_populated", true);
             model.addAttribute("results_not_found", false);
-
             model.addAttribute("moviesList", moviesList);
         } else {
             model.addAttribute("results_populated", false);

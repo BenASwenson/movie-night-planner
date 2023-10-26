@@ -83,17 +83,48 @@
                     <div class="mt-3">
                         <button type="button" class="btn btn-dark more-info-btn">More Information</button>
                     </div>
-                    <!-- Additional Information (Initially Hidden) -->
-                    <div class="additional-info" style="display: none;">
-                        <p>Popularity: <span class="popularity"></span></p>
-                        <p>Release Date: <span class="release-date"></span></p>
-                        <p>Vote Average: <span class="vote-average"></span></p>
-                        <p>Vote Count: <span class="vote-count"></span></p>
-                    </div>
 
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col text-left">
+                                <button type="button" class="btn btn-dark more-info-btn">Show More</button>
+                            </div>
+
+                            <div class="col text-center">
+                                <!-- Watchlist Button -->
+                                <form th:action="@{/addToWatchlist/movies}" method="POST">
+                                    <input type="hidden" name="movieTitle" th:value="${movie.title}" />
+                                    <input type="hidden" name="movieId" th:value="${movie.id}" />
+                                    <button type="submit" class="btn btn-outline-dark">Add To Watchlist</button>
+                                </form>
+                            </div>
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-outline-dark">Add to Calendar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional Information (Initially Hidden) -->
+                    <div class="additional-info container mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col">
+                                <p>Popularity: <span class="popularity"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Release Date: <span class="release-date"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Vote Average: <span class="vote-average"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Vote Count: <span class="vote-count"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Watch: <span class="watch_providers"></span></p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
-
         </section>
 
         <!-- This content will not be displayed if the search results are not populated -->
