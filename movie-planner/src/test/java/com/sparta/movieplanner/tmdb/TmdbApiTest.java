@@ -82,5 +82,19 @@ public class TmdbApiTest {
         List<MediaShort> result = tmdb.findMoviesByGenres(Lists.list(12,28));
         System.out.println(result);
     }
+
+
+    @Test
+    void testDiscoverMovie() {
+        DiscoverMovie discover = new DiscoverMovie();
+        List<MediaShort> movies = discover
+                .setLanguage("en-GB")
+                .setPage(1)
+                .setYear(2000)
+                .setSortBy(DiscoverMovie.SortBy.PopularityDesc)
+                .execute();
+
+        System.out.println(movies);
+    }
 }
 
