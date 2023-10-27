@@ -3,6 +3,7 @@ package com.sparta.movieplanner.services;
 import com.sparta.movieplanner.converters.GenreConverter;
 import com.sparta.movieplanner.dto.GenreDTO;
 import com.sparta.movieplanner.tmdb.Genre;
+import com.sparta.movieplanner.tmdb.MediaShort;
 import com.sparta.movieplanner.tmdb.Tmdb;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,5 +28,15 @@ public class GenreService {
             dtoGenres.add(GenreConverter.entityToDto(g));
         }
         return dtoGenres;
+    }
+
+    public List<MediaShort> getMoviesByGenre(List<Integer> genreIds) {
+        return tmdb.findMoviesByGenres(genreIds);
+    }
+
+    public List<MediaShort> getMoviesByGenre(int genreId) {
+        List<Integer> genres = new ArrayList<>();
+        genres.add(genreId);
+        return getMoviesByGenre(genres);
     }
 }
