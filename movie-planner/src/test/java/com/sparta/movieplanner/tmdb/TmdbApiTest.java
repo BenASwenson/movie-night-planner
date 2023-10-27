@@ -3,8 +3,6 @@ package com.sparta.movieplanner.tmdb;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TmdbApiTest {
@@ -89,9 +87,9 @@ public class TmdbApiTest {
         DiscoverMovie discover = new DiscoverMovie();
         List<MediaShort> movies = discover
                 .setLanguage("en-GB")
-                .setPage(1)
-                .setYear(2000)
-                .setSortBy(DiscoverMovie.SortBy.PopularityDesc)
+                .atPage(1)
+                .onYear(2000)
+                .sortBy(DiscoverMovie.SortBy.PopularityDesc)
                 .execute();
 
         System.out.println(movies);

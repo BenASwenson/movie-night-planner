@@ -102,19 +102,16 @@ public class MovieServiceImpl implements MovieService {
 
     @Override
     public List<ProviderDTO> findAllProvidersForAMovieByTMDBId(int id) throws IOException, InterruptedException {
-        System.out.println("tmdb id: " + id);
         Movie movie = findMovieByTMDBId(id);
         List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
         if(movie == null || movie.getOffers() == null || movie.getOffers().size() == 0) return null; //throw new MissingResourceException("The movie does not have providers", "Provider Class", "TMDB id: " + id);
         for(int i = 0; i < movie.getOffers().size(); i++){
             Offers offer = movie.getOffers().get(i);
-            log.info("Finding the provider by id ");
             if(!providerRepository.findById(movie.getOffers().get(i).getProvider_id()).isPresent()){
                 continue;
             }
             Provider provider = providerRepository.findById(movie.getOffers().get(i).getProvider_id()).get();
-            System.out.println("Found provider");
             ProviderDTO providerDTO = providerMapper.entityToDto(provider);
             providerDTO.setProvider_url(offer.getUrls().getRaw_web());
             if(i > 0 && providers.get(providers.size()-1).getId() ==  providerDTO.getId()){

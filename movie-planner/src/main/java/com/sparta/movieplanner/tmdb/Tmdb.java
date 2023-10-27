@@ -62,6 +62,10 @@ public class Tmdb {
         return result.block();
     }
 
+    public static class GenreResponse {
+        public ArrayList<Genre> genres;
+    }
+
     /**
      * Retrieve all genres available in TMDB.
      *

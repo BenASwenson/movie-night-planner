@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
+
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -32,7 +34,7 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String home(@RequestParam(name = "logout", required = false) String logout, Model model, Authentication authentication) {
+    public String home(@RequestParam(name = "logout", required = false) String logout, Model model, Authentication authentication) throws IOException, InterruptedException {
         model.addAttribute("activePage", "home");
         String activePage = (String) model.getAttribute("activePage");
         log.info("Active Page: " + activePage);
@@ -56,6 +58,7 @@ public class HomeController {
         }
 
         var trending = movieService.getTrending();
+        System.out.println(trending);
         model.addAttribute("trending", trending);
 
 
