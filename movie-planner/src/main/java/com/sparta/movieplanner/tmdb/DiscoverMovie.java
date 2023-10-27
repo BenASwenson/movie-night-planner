@@ -54,7 +54,7 @@ public class DiscoverMovie {
         return this;
     }
 
-    public DiscoverMovie setPage(Integer page) {
+    public DiscoverMovie atPage(Integer page) {
         this.page = page;
         return this;
     }
@@ -79,7 +79,7 @@ public class DiscoverMovie {
         return this;
     }
 
-    public DiscoverMovie setSortBy(SortBy sortBy) {
+    public DiscoverMovie sortBy(SortBy sortBy) {
         this.sortBy = sortBy;
         return this;
     }
@@ -99,7 +99,7 @@ public class DiscoverMovie {
         return this;
     }
 
-    public DiscoverMovie setYear(Integer year) {
+    public DiscoverMovie onYear(Integer year) {
         this.year = year;
         return this;
     }
