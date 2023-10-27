@@ -28,6 +28,21 @@ body {
     padding: 20px;
 }
 
+.overlay-genre {
+    position: absolute;
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
+    padding: 20px;
+}
+
+.overlay-genre h1 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
 .overlay h1 {
     font-size: 24px;
     margin-bottom: 10px;

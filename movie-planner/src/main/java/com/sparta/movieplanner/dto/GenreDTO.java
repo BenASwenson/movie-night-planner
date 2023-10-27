@@ -1,9 +1,13 @@
-package com.sparta.movieplanner.tmdb;
+package com.sparta.movieplanner.dto;
 
-public class Genre {
-
+public class GenreDTO {
     private int id;
     private String name;
+
+    public GenreDTO(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -28,4 +32,5 @@ public class Genre {
                 ", name='" + name + '\'' +
                 '}';
     }
+
 }
