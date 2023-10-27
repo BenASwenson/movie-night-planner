@@ -5,20 +5,6 @@ body {
 .navbar {
     border-bottom: 1px solid black;
 }
-/*
-.image-container {
-    max-width: 100%;
-    text-align: center;
-}
-
-.image-container img {
-    width: 100%;
-    height: auto;
-    opacity: .09;
-    margin-top: 35px;
-    padding: 50px;
-}
-*/
 
 .image-container {
     position: relative;
@@ -27,12 +13,14 @@ body {
 
 .image-container img {
     opacity: .09;
+    width: 400px;
+    height: auto;
 }
 
 
 .overlay {
     position: absolute;
-    top: 50%;
+    top: 70%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -50,3 +38,47 @@ body {
     padding: 10px;
     font-size: 16px;
 }
+
+.sectionHeader {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.calendar {
+
+}
+
+.movie-image img {
+    width: 25%;
+}
+
+.h2-search-results {
+    text-align: left;
+}
+
+.search-result {
+    border: 2px solid black;
+}
+
+.divScroll {
+    overflow:auto;
+    white-space: nowrap;
+    margin-top: 20px;
+
+}
+
+.provider {
+    display: inline-block;
+    max-height:50%;
+    max-width:50%;
+}
+
+.providerImage{
+    border-radius: 10%;
+    margin-right: 10px;
+}
+
+

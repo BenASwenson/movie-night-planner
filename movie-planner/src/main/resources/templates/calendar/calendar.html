@@ -1,10 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Movie Night Planner - Calendar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/index.css">
+<!--    <script data-cfasync="false" data-tockify-script="embed"-->
+<!--            src="https://public.tockify.com/browser/embed.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js"></script>
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function() {
+          var calendarEl = document.getElementById('calendar');
+          var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth'
+          });
+          calendar.render();
+        });
+
+    </script>
+
 </head>
 <body>
+<div th:replace="~{navbar/navbar :: navbar}"></div>
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <div class="image-container">
+                <div class="sectionHeader">
+                    <h1 style="padding-top: 50px;">Calendar</h1>
+                </div>
+                <img src="/static/calendar.png" class="centered-image img-fluid" alt="movie clapperboard background">
 
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 text-center">
+            <p>Add events in your calendar to plan viewings of your favourite movies and TV series.</p>
+        </div>
+
+    </div>
+    <div clas="row">
+        <div class="col-12 text-center">
+           <div id="calendar"></div>
+        </div>
+<!-- Calendly inline widget begin -->
+<!--            <div class="calendly-inline-widget" data-url="https://calendly.com/movienightplanner/movie-night-planner?hide_event_type_details=1&hide_gdpr_banner=1" style="min-width:320px;height:700px;"></div>-->
+<!--            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>-->
+<!-- Calendly inline widget end -->
+<!--        <div data-tockify-calendar="spirited" data-tockify-component="calendar" data-tockify-view="monthly"></div>-->
+
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
 </html>

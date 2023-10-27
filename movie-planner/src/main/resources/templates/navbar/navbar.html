@@ -1,38 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Movie Night Planner - Movie Search</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
 <nav th:fragment="navbar" class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
+        <a class="navbar-brand" th:href="@{/home}">
+            <img src="/static/SpartaGlobalLogo.png" alt="Sparta Global" width="60" class="d-inline-block align-text-top me-2">
+            Movie Night
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Movies</a>
+                    <a class="nav-link" th:classappend="${activePage == 'home' ? ' active' : ''}" th:href="@{/home}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Television</a>
+                    <a class="nav-link" th:classappend="${activePage == 'movies' ? ' active' : ''}" th:href="@{/movies}">Movies</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Genres</a>
+                    <a class="nav-link" th:classappend="${activePage == 'television' ? ' active' : ''}" th:href="@{/television}">Television</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Watch List</a>
+                    <a class="nav-link" th:classappend="${activePage == 'genres' ? ' active' : ''}" th:href="@{/genres}">Genres</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Calendar</a>
-                </li>
-            </ul>
 
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${activePage == 'watchList' ? ' active' : ''}" th:if="${authenticated}" th:href="@{/watchList}">Watch List</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" th:classappend="${activePage == 'calendar' ? ' active' : ''}" th:if="${authenticated}" th:href="@{/calendar}">Calendar</a>
+                </li>
+
+                <li class="nav-item" th:unless="${authenticated}">
+                    <button type="button" class="btn btn-outline-secondary btn-sm"><a class="nav-link" th:href="@{/login}">Login / Register</a></button>
+                </li>
+                <form th:action="@{/perform_logout}" method="POST">
+                    <button id="logoutButton" class="btn btn-outline-secondary btn-sm" th:if="${authenticated}">Logout</button>
+                </form>
+            </ul>
         </div>
     </div>
 </nav>
