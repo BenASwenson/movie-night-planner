@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -38,7 +39,7 @@ public class WatchlistController {
 
 
     @GetMapping("watchList")
-    public String watchList(Authentication authentication, Model model) {
+    public String watchList(Authentication authentication, Model model) throws IOException, InterruptedException {
         model.addAttribute("activePage", "watchList");
         String activePage = (String) model.getAttribute("activePage");
         log.info("Active Page: " + activePage);
@@ -65,7 +66,7 @@ public class WatchlistController {
          * useful for a movie only filter
          */
         List<MovieDetail> movieWatchlist = watchlistService.getMovieWatchlistByUserId(userId);
-
+        System.out.println(movieWatchlist);
         if (!movieWatchlist.isEmpty()) {
             log.info("movieWatchlist: {}", movieWatchlist);
             model.addAttribute("movieWatchlist", movieWatchlist);
