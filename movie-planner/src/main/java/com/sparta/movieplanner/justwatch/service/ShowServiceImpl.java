@@ -81,8 +81,6 @@ public class ShowServiceImpl implements ShowService{
     public List<ProviderDTO> findAllShowProvidersByTMDBId(int id) {
         Show show = findShowByTMDBId(id);
 
-        System.out.println(show);
-
         List<ProviderDTO> providers = new ArrayList<>();
         // e.g. movie with id 2995 gives null providers
         if(show.getOffers() == null || show.getOffers().size() == 0) return null;//throw new MissingResourceException("The show does not have providers", "Provider Class", "TMDB id: " + id);

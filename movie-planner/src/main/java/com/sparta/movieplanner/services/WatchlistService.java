@@ -2,6 +2,7 @@ package com.sparta.movieplanner.services;
 
 import com.sparta.movieplanner.entities.Type;
 import com.sparta.movieplanner.entities.Watchlist;
+import com.sparta.movieplanner.justwatch.service.ShowService;
 import com.sparta.movieplanner.repositories.UserRepository;
 import com.sparta.movieplanner.repositories.WatchlistRepository;
 import com.sparta.movieplanner.tmdb.MediaShort;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,11 @@ public class WatchlistService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private com.sparta.movieplanner.justwatch.service.MovieService justWatchMovieService;
+
+    @Autowired
+    private ShowService justWatchShowService;
     public Watchlist createMovieWatchlistEntry(String movieTitle, int movieId, String username ) {
         log.info("create movie watchlist entry method active");
         Watchlist newWatchlistEntry = new Watchlist();
@@ -50,7 +57,7 @@ public class WatchlistService {
         return newWatchlistEntry;
     }
 
-    public List<MovieDetail> getMovieWatchlistByUserId(Long userId) {
+    public List<MovieDetail> getMovieWatchlistByUserId(Long userId) throws IOException, InterruptedException {
         log.info("get movie watchlist by user id method is active");
         List<Watchlist> userMovieWatchlist = findAllEntries_ByUserIdAndMediaType(userId, Type.FILM);
 
@@ -59,7 +66,6 @@ public class WatchlistService {
         for (Watchlist watchlist : userMovieWatchlist) {
             int movieId = watchlist.getTitleId();
             MovieDetail movieDetail = tmdb.getMovieDetail(movieId);
-
             movieList.add(movieDetail);
         }
 
@@ -85,7 +91,7 @@ public class WatchlistService {
         return tvShowList;
     }
 
-    public List<MediaShort> getAllWatchlistByUserId(Long userId) {
+    public List<MediaShort> getAllWatchlistByUserId(Long userId) throws IOException, InterruptedException {
         log.info("get all watchlist by user id method active");
         List<Watchlist> getAllWatchlist = findAllEntries_ByUserId(userId);
 
@@ -109,7 +115,7 @@ public class WatchlistService {
                 mediaShort.setVote_average(movieDetail.getVote_average());
                 mediaShort.setVote_count((int) movieDetail.getVote_count());
                 mediaShort.setPoster_path(movieDetail.getPoster_path());
-
+                mediaShort.setProviders(justWatchMovieService.findAllProvidersForAMovieByTMDBId(movieDetail.getId()));
                 log.info("movie mediaShort: {}", mediaShort);
                 allWatchlistList.add(mediaShort);
 
@@ -128,6 +134,7 @@ public class WatchlistService {
                 mediaShort.setVote_average(tvSeries.getVote_average());
                 mediaShort.setVote_count(tvSeries.getVote_count());
                 mediaShort.setPoster_path(tvSeries.getPoster_path());
+                mediaShort.setProviders(justWatchShowService.findAllShowProvidersByTMDBId(tvSeries.getId()));
 
                 log.info("tv show mediaShort: {}", mediaShort);
                 allWatchlistList.add(mediaShort);

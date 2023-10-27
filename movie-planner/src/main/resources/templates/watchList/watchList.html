@@ -38,6 +38,13 @@
                                 <img th:src="'https://image.tmdb.org/t/p/original' + ${watchlist.poster_path}" alt="image goes here">
                             </div>
                         </div>
+                        <div class="divScroll">
+                            <div th:each="provider: ${watchlist.providers}" class="provider">
+                                <a th:href="${provider.provider_url}" target="_blank">
+                                    <img th:src="${provider.icon_url}" alt="Provider icon image" class="providerImage">
+                                </a>
+                            </div>
+                        </div>
 
                         <div class="mt-3">
                             <div class="row">
