@@ -10,8 +10,14 @@
 </head>
 <body>
 <div th:replace="~{navbar/navbar :: navbar}"></div>
+
+<section th:if="${logoutSuccess}" class="logoutSuccess">
+    <p>You have been logged out successfully!</p>
+</section>
+
 <div class="container">
     <div class="row">
+        <!-- Search -->
         <div class="row">
             <div class="col-12 text-center">
                 <div class="image-container">
@@ -20,115 +26,110 @@
                     </div>
                     <img src="/static/movienightclapper.png" class="centered-image img-fluid" alt="movie clapperboard background">
                     <div class="overlay">
-                        <h1>Search for genre:</h1>
-                        <input type="text" placeholder="Enter a genre to search">
+                        <h1>Search by genre:</h1>
+                        <!-- Genre Buttons -->
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <form th:action="@{/genres/search}" method="POST">
+                                        <button class="btn btn-primary btn-block mb-3">Button 1</button>
+                                    </form>
+                                    <form th:action="@{/genres/search}" method="POST">
+                                        <button class="btn btn-primary btn-block mb-3">Button 2</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-4">
+                                    <form th:action="@{/genres/search}" method="POST">
+                                        <button class="btn btn-primary btn-block mb-3">Button 3</button>
+                                    </form>
+                                    <form th:action="@{/genres/search}" method="POST">
+                                        <button class="btn btn-primary btn-block mb-3">Button 4</button>
+                                    </form>
+                                </div>
+                                <div class="col-md-4">
+                                    <form th:action="@{/genres/search}" method="POST">
+                                        <button class="btn btn-primary btn-block mb-3">Button 5</button>
+                                    </form>
+                                    <form th:action="@{/genres/search}" method="POST">
+                                        <button class="btn btn-primary btn-block mb-3">Button 6</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Search result below -->
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-4 mb-4">
-                <h3>Barbie</h3>
-                <p>barbie and ken are having the time of their lives in the colorful and seemingly
-                    perfect world of barbie land.  However, when they get a chance to go the real
-                    world, they soon discover the joys and perils of living among humans.</p>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Rating</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>7.1</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Age Rating</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>12A</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Director</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Greta Gerwig</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Genres</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Comedy, Action & Adventure, Fantasy</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Watch</h5>
-                    </div>
-                    <div class="col-4">
-                        <img src="" alt="Amazon">
-                    </div>
-                    <div class="col-4">
-                        <img src="" alt="Apple TV">
-                    </div>
-                </div>
 
-            </div>
+        <!-- This content will be displayed if the search results are populated -->
+        <section th:if="${results_populated}" class="container">
+            <h2 class="col-md-8 offset-md-2 mt-4 text-center">Search Results:</h2>
+            <section th:each="movie : ${genresList}" class="row">
+                <div class="col-md-8 offset-md-2 mt-4 mb-4 p-3 search-result" th:attr="data-movie-id=${movie.id}">
+                    <h3 th:text="${movie.title}"></h3>
+                    <p th:text="${movie.overview}"></p>
 
-        </div>
-        <!-- Search result below -->
-        <div class="row">
-            <div class="col-md-8 offset-md-2 mt-4 mb-4">
-                <h3>Man on the Moon</h3>
-                <p>The story of the life and career of eccentric avant-garde comedian, Andy Kaufman.</p>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Rating</h5>
+                    <div class="row justify-content-between">
+                        <div class="movie-image">
+                            <img th:src="'https://image.tmdb.org/t/p/original' + ${movie.poster_path}" alt="image goes here">
+                        </div>
                     </div>
-                    <div class="col-4">
-                        <h5>7.4</h5>
+                    <div class="divScroll">
+                        <div th:each="provider: ${movie.providers}" class="provider">
+                            <a th:href="${provider.provider_url}" target="_blank">
+                                <img th:src="${provider.icon_url}" alt="Provider icon image" class="providerImage">
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Age Rating</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>15</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Director</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Milos Forman</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Genres</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Comedy, Drama</h5>
-                    </div>
-                </div>
-                <div class="row justify-content-between">
-                    <div class="col-4">
-                        <h5>Watch</h5>
-                    </div>
-                    <div class="col-4">
-                        <img src="" alt="Netflix">
-                    </div>
-                </div>
 
-            </div>
+                    <div class="container mt-3">
+                        <div class="row">
+                            <div class="col text-left">
+                                <button type="button" class="btn btn-dark more-info-btn">Show More</button>
+                            </div>
 
-        </div>
+                            <div class="col text-center">
+                                <!-- Watchlist Button -->
+                                <form th:action="@{/addToWatchlist/movies}" method="POST">
+                                    <input type="hidden" name="movieTitle" th:value="${movie.title}" />
+                                    <input type="hidden" name="movieId" th:value="${movie.id}" />
+                                    <button type="submit" class="btn btn-outline-dark">Add To Watchlist</button>
+                                </form>
+                            </div>
+                            <div class="col text-right">
+                                <button type="button" class="btn btn-outline-dark">Add to Calendar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Additional Information (Initially Hidden) -->
+                    <div class="additional-info container mt-3" style="display: none;">
+                        <div class="row">
+                            <div class="col">
+                                <p>Popularity: <span class="popularity"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Release Date: <span class="release-date"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Vote Average: <span class="vote-average"></span></p>
+                            </div>
+                            <div class="col">
+                                <p>Vote Count: <span class="vote-count"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- This content will not be displayed if the search results are not populated -->
+        <section th:if="${results_not_found}">
+            <h2>No results found</h2>
+            <p th:text="'Sorry, we could not find any movies of the genre: ' + ${genreTitle}"></p>
+        </section>
+
 
 
 
