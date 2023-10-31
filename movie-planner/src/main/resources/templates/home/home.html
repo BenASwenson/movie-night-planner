@@ -21,30 +21,40 @@
     </section>
     <div class="row">
         <!-- Top image and centered Heading -->
-        <div class="col-12 text-center mb-5">
+        <div class="col-12 text-center mb-5 mt-3">
             <div class="image-container">
                 <div class="sectionHeader">
-                    <h1>Trending Shows</h1>
+                    <h1>Trending</h1>
                 </div>
                 <img src="/static/movieScreen_noPlayButton.png" style="opacity: .09; width: 300px; height: auto;" alt="television screen" class="centered-image img-fluid home-image">
             </div>
         </div>
         <!-- Search results below -->
-        <section th:each="show : ${trending}" class="row justify-content-center">
-            <div class="col-md-8 m-3 p-3 search-result" th:attr="data-movie-id=${show.id}">
-                <h3 th:text="${show.title}"></h3>
-                <p th:text="${show.overview}"></p>
-
-                <div class="row justify-content-between">
-                    <div class="movie-image">
-                        <img th:src="'https://image.tmdb.org/t/p/original' + ${show.poster_path}" alt="image goes here">
+        <section th:each="show : ${trending}" class="row">
+            <div class="col-md-8 offset-md-2 mt-4 mb-4 p-3 search-result" th:attr="data-movie-id=${show.id}">
+                <div class="movie-details">
+                    <div class="movie-info">
+                        <h3 th:text="${show.title}"></h3>
+                        <p th:text="${show.overview}"></p>
                     </div>
                 </div>
-                <div class="divScroll">
-                    <div th:each="provider: ${show.providers}" class="provider">
-                        <a th:href="${provider.provider_url}" target="_blank">
-                            <img th:src="${provider.icon_url}" alt="Provider icon image" class="providerImage">
-                        </a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="movie-image">
+                            <img th:src="'https://image.tmdb.org/t/p/original' + ${show.poster_path}" alt="image goes here">
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <th:block th:if="${show.providers != null and #lists.size(show.providers) > 0}">
+                            <p><b>Viewing Platforms:</b></p>
+                        </th:block>
+                        <div class="providers-container">
+                            <div th:each="provider: ${show.providers}" class="provider">
+                                <a th:href="${provider.provider_url}" target="_blank">
+                                    <img th:src="${provider.icon_url}" alt="Provider icon image" class="providerImage">
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="container mt-3">
