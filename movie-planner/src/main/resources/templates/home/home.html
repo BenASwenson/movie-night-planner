@@ -15,11 +15,10 @@
 
 <div th:replace="~{navbar/navbar :: navbar}"></div>
 
-<section th:if="${logoutSuccess}" class="logoutSuccess">
-    <p>You have been logged out successfully!</p>
-</section>
-
-<div class="container">
+<div class="container container-body">
+    <section th:if="${logoutSuccess}" class="logoutSuccess">
+        <p>You have been logged out successfully!</p>
+    </section>
     <div class="row">
         <!-- Top image and centered Heading -->
         <div class="col-12 text-center mb-5">

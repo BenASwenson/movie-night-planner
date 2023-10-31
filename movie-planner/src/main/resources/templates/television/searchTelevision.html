@@ -12,11 +12,10 @@
 <body>
 <div th:replace="~{navbar/navbar :: navbar}"></div>
 
-<section th:if="${logoutSuccess}" class="logoutSuccess">
-    <p>You have been logged out successfully!</p>
-</section>
-
-<div class="container">
+<div class="container container-body">
+    <section th:if="${logoutSuccess}" class="logoutSuccess">
+        <p>You have been logged out successfully!</p>
+    </section>
     <div class="row">
         <!-- Search -->
         <div class="row">
@@ -38,25 +37,36 @@
         </div>
 
         <!-- This content will be displayed if the search results are populated -->
-        <section th:if="${results_populated}" class="container">
-            <h2 class="col-md-8 offset-md-2 mt-4 text-center">Search Results:</h2>
+        <section th:if="${results_populated}" class="container mt-4">
+            <h2 class="text-center">Search Results:</h2>
             <section th:each="television : ${televisionList}" class="row">
                 <div class="col-md-8 offset-md-2 mt-4 mb-4 p-3 search-result" th:attr="data-television-id=${television.id}">
-                    <h3 th:text="${television.name}"></h3>
-                    <p th:text="${television.overview}"></p>
+                    <div class="movie-details">
+                        <div class="movie-info">
+                            <h3 th:text="${television.name}"></h3>
+                            <p th:text="${television.overview}"></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="movie-image">
+                                <img th:src="'https://image.tmdb.org/t/p/original' + ${television.poster_path}" alt="image goes here">
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <th:block th:if="${television.providers != null and #lists.size(television.providers) > 0}">
+                                <p><b>Viewing Platforms:</b></p>
+                            </th:block>
+                            <div class="providers-container">
+                                <div th:each="provider: ${television.providers}" class="provider">
+                                    <a th:href="${provider.provider_url}" target="_blank">
+                                        <img th:src="${provider.icon_url}" alt="Provider icon image" class="providerImage">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                    <div class="row justify-content-between">
-                        <div class="movie-image">
-                            <img th:src="'https://image.tmdb.org/t/p/original' + ${television.poster_path}" alt="image goes here">
-                        </div>
-                    </div>
-                    <div class="divScroll">
-                        <div th:each="provider: ${television.providers}" class="provider">
-                            <a th:href="${provider.provider_url}" target="_blank">
-                                <img th:src="${provider.icon_url}" alt="Provider icon image" class="providerImage">
-                            </a>
-                        </div>
-                    </div>
                     <div class="container mt-3">
                         <div class="row">
                             <div class="col text-left">
