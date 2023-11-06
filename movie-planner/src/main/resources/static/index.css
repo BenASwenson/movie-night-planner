@@ -76,6 +76,7 @@ body {
 
 .search-result {
     border: 2px solid black;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.7);
 }
 
 .divScroll {
@@ -92,10 +93,10 @@ body {
 }
 
 .providerImage{
-    width: 30px;
+    width: 40px;
     height: auto;
     border-radius: 10%;
-    margin-right: 5px;
+    margin-right: 10px;
     margin-bottom: 5px;
 }
 
@@ -122,6 +123,8 @@ h5 {
 .providers-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
 }
 
 

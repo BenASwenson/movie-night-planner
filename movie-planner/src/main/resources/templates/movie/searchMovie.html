@@ -31,7 +31,7 @@
                     <div class="overlay">
                         <h1>Search for movie by title:</h1>
                         <form th:action="@{/movies/search}" method="POST">
-                            <input type="text" name="movieTitle" placeholder="Enter a title to search">
+                            <input type="text" name="movieTitle" placeholder="Enter a title to search" th:value="${param.movieTitle}">
                             <input type="submit" value="Search">
                         </form>
                     </div>
